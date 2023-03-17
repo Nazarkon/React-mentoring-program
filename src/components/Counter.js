@@ -8,11 +8,11 @@ const CounterNumber = (props) => {
     const [number, setCount] = useState(defaultValue || 0);
 
     const incrementValue = () => {
-        setCount(number + 1)
+        setCount(prevCount => prevCount + 1)
     }
 
     const decrementValue = () => {
-        setCount(number - 1);
+        setCount(prevCount => prevCount - 1);
     }
 
     const IncrementButtonStyle = {
