@@ -1,9 +1,11 @@
 import React, {useState} from "react";
 
 
-const CounterNumber = () => {
+const CounterNumber = (props) => {
 
-    const [number, setCount] = useState(0);
+    const { defaultValue } = props
+
+    const [number, setCount] = useState(defaultValue || 0);
 
     const incrementValue = () => {
         setCount(number + 1)

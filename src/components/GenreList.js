@@ -3,7 +3,7 @@ import "./GenreList.scss"
 
 const GenreList = (props) => {
 
-  const { genreList, currentItem, updateGenreList } = props;
+  const { genreList, currentItem, updateList } = props;
 
   const [selectedID, setSelectedId] = useState("");
 
@@ -14,7 +14,7 @@ const GenreList = (props) => {
 
   const handleItemClick = (id) => {
     setSelectedId(id)
-    updateGenreList()
+    updateList()
   }
     
     

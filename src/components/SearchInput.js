@@ -1,9 +1,11 @@
 import React, {useState} from "react"
 import "./SearchInput.scss"
 
-const SearchInput = () => {
+const SearchInput = (props) => {
 
-    const [searchValue, setSearchValue] = useState('')
+    const { defaultValue } = props;
+
+    const [searchValue, setSearchValue] = useState(defaultValue || '')
 
     const onSearch = () => {
         alert("Search Started");

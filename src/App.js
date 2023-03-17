@@ -13,8 +13,12 @@ function App() {
   }
   return (
     <div className="App">
-     <Counter/>
-     <SearchInput/>
+     <Counter
+     defaultValue={2}
+     />
+     <SearchInput
+     defaultValue="Search something"
+     />
      <GenreList 
         genreList={genreListItems}
         currentItem={'horror'}
