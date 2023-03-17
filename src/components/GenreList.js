@@ -3,39 +3,31 @@ import "./GenreList.scss"
 
 const GenreList = (props) => {
 
-    const { genreList, currentItem } = props;
+  const { genreList, currentItem, updateGenreList } = props;
+
+  const [selectedID, setSelectedId] = useState("");
+
+  useEffect(() => {
+    setSelectedId(currentItem)
+  }, [])
 
 
-
-    useEffect(() => {
-      updateSelectedItem(currentItem)
-    }, [])
-
-    const [items, updateItems] = useState([])
-
-
-
-  const updateSelectedItem = (id) => {
-      const updatedItems = genreList.map((item) => {
-          if (item.id === id) {
-            return { ...item, is_active: true };
-          }
-          return { ...item, is_active: false };
-        });
-        updateItems(updatedItems)
+  const handleItemClick = (id) => {
+    setSelectedId(id)
+    updateGenreList()
   }
     
     
     return (
         <ul className="list-container">
-          {items.map((item) => (
-        <li
-          key={item.id}
-          className={item.is_active ? 'item' : ''}
-          onClick={() => updateSelectedItem(item.id)}
-        >
-          {item.name}
-        </li>
+          {genreList.map((item) => (
+          <li
+            key={item.id}
+            className={item.id === selectedID ? 'item-light' : ''}
+            onClick={() => handleItemClick(item.id)}
+          >
+            {item.name}
+          </li>
       ))}
         </ul>
     );
