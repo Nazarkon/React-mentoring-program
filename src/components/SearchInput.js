@@ -3,20 +3,17 @@ import "./SearchInput.scss"
 
 const SearchInput = (props) => {
 
-    const { defaultValue } = props;
+    const { defaultValue , onSearch} = props;
 
     const [searchValue, setSearchValue] = useState(defaultValue || '')
 
-    const onSearch = () => {
-        alert("Search Started");
-    }
 
     const element = ( 
         <form id="search-form" role="search">
         <label className="search-label">FIND YOUR MOViE</label>
             <div className="search-container">
                 <input 
-                  type="search"
+                  type="text"
                   className="search-input"
                   name="search"
                   value={searchValue}
@@ -25,7 +22,7 @@ const SearchInput = (props) => {
                   />
                 <button 
                     className="search-button"
-                    onClick={onSearch}
+                    onClick={() => onSearch(searchValue)}
                     >
                     Search
                 </button>
