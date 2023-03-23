@@ -15,6 +15,7 @@ const SearchInput = (props) => {
                 <input 
                   type="text"
                   className="search-input"
+                  aria-label="search"
                   name="search"
                   value={searchValue}
                   onChange={event => setSearchValue(event.target.value)}
