@@ -16,7 +16,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "jest": "jest --watchAll"
+    "jest": "jest --watchAll",
+    "cypress": "npx cypress run"
   },
   "jest": {
     "moduleNameMapper": {
