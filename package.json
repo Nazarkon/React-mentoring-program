@@ -16,7 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "jest": "jest --watchAll",
+    "jest": "jest --watch a",
     "cypress": "npx cypress run"
   },
   "jest": {

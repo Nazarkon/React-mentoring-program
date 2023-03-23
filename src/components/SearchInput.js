@@ -7,6 +7,12 @@ const SearchInput = (props) => {
 
     const [searchValue, setSearchValue] = useState(defaultValue || '')
 
+    const handleClick = (e) => {
+        e.preventDefault();
+        onSearch(searchValue)
+
+    }
+
 
     const element = ( 
         <form id="search-form" role="search">
@@ -23,7 +29,7 @@ const SearchInput = (props) => {
                   />
                 <button 
                     className="search-button"
-                    onClick={() => onSearch(searchValue)}
+                    onClick={(e) => handleClick(e)}
                     >
                     Search
                 </button>

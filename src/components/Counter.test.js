@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom'
 import Counter from "./Counter";
+import { act } from 'react-dom/test-utils';
 
 describe("Check Counter element behavior", () => {
 
@@ -25,7 +26,9 @@ describe("Check Counter element behavior", () => {
         expect(countValue).toBe('Count: 0');
 
         const buttonDecrement = screen.getByRole('button', { name: /decrement/i });
-        await buttonDecrement.click();
+        await act(async () => {
+            buttonDecrement.click();
+        }) 
 
         const newCountValue = countElement.textContent;
 
@@ -43,7 +46,9 @@ describe("Check Counter element behavior", () => {
         expect(countValue).toBe('Count: 0');
 
         const buttonDecrement = screen.getByRole('button', { name: /increment/i });
-        await buttonDecrement.click();
+        await act(async () => {
+         buttonDecrement.click();
+        })
 
         const newCountValue = countElement.textContent;
 
