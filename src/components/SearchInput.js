@@ -7,6 +7,12 @@ const SearchInput = (props) => {
 
     const [searchValue, setSearchValue] = useState(defaultValue || '')
 
+    const handleClick = (e) => {
+        e.preventDefault();
+        onSearch(searchValue)
+
+    }
+
 
     const element = ( 
         <form id="search-form" role="search">
@@ -15,6 +21,7 @@ const SearchInput = (props) => {
                 <input 
                   type="text"
                   className="search-input"
+                  aria-label="search"
                   name="search"
                   value={searchValue}
                   onChange={event => setSearchValue(event.target.value)}
@@ -22,7 +29,7 @@ const SearchInput = (props) => {
                   />
                 <button 
                     className="search-button"
-                    onClick={() => onSearch(searchValue)}
+                    onClick={(e) => handleClick(e)}
                     >
                     Search
                 </button>
