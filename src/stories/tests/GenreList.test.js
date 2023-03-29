@@ -1,14 +1,30 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+/* eslint-disable testing-library/prefer-screen-queries */
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom'
-import GenreList from "./GenreList";
-import genreList from "../mock/genreData.json"
+import GenreList from '../atoms/GenreList';
+import genreList from "../../mock/genreData.json"
 
 describe("Check GenreList element behavior", () => {
+
+    it("Matches snapshot", () => {
+        const { container } = render(
+           <GenreList genreList={genreList} currentItem={genreList[0]}/>
+        );
+        expect(container).toMatchSnapshot();
+      });
     test("Check that component renders all genres passed in props", () => {
-        render(<GenreList genreList={genreList} currentItem={genreList[0]}/>)
-        genreList.forEach(item => {
-            expect(screen.getByText(item.name)).toBeInTheDocument()
-        })
+        const { getByText } = render(<GenreList genreList={genreList} currentItem={genreList[0]}/>)
+
+        expect(getByText("All")).toBeInTheDocument();
+
+        expect(getByText("Documentary")).toBeInTheDocument();
+
+        expect(getByText("Comedy")).toBeInTheDocument();
+
+        expect(getByText("Horror")).toBeInTheDocument();
+
+        expect(getByText("Crime")).toBeInTheDocument();
     })
 
     test("Check that component highlights a selected genre passed in props", () => {
@@ -27,7 +43,7 @@ describe("Check GenreList element behavior", () => {
 
         const genreElement = screen.getByText('Comedy');
 
-        fireEvent.click(genreElement)
+        userEvent.click(genreElement)
 
         expect(onClick).toHaveBeenCalledTimes(1);
         expect(onClick).toHaveBeenCalledWith({"id": "comedy", "is_active": false, "name": "Comedy"});

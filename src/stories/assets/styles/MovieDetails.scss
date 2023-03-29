@@ -1,0 +1,62 @@
+.movie-details-container{
+    width: 100%;
+    max-width: 1200px;
+    background: #424242;
+    display: flex;
+        .movie-details-container-image{
+            width: 100%;
+            max-width: 320px;
+                .movie-card-image{
+                    width: auto;
+                    height: 100%;
+                }
+        }
+        .movie-details-container-description{
+            margin:0px 50px 0px 60px;
+            .movie-details-description-title{
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                    .movie-details-name{
+                        font-size: 40px;
+                        color: #FFFFFF;
+                        line-height: 49px;
+                        text-transform: uppercase;
+                        margin-right: 29px;
+                    }
+                    .movie-details-rating{
+                        width: 60px;
+                        height: 60px;
+                        border: 1px solid #FFFFFF;
+                        border-radius: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        text-transform: uppercase;
+                        font-size: 20px;
+                        line-height: 24px;
+                        color: #FFFFFF;
+                    }
+            }
+            .movie-details-genres{
+                color: #FFFFFF;
+                opacity: 0.5;
+            }
+            .movie-details-container-subtitle{
+                color: #F65261;
+                font-size: 24px;
+                margin: 29px 0px 29px 0px;
+                    .movie-details-year{
+                        margin-right: 51px;
+                    }
+            }
+            .movie-details-description{
+                color:#FFFFFF;
+                opacity: 0.5;
+                font-weight: 300;
+                font-size: 20px;
+                line-height: 24px;
+                text-align: left;
+            }
+        }
+}

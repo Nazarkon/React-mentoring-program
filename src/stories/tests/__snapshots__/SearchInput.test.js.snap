@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check SearchInput element behavior Matches snapshot 1`] = `
+<div>
+  <form
+    id="search-form"
+    role="search"
+  >
+    <label
+      class="search-label"
+    >
+      FIND YOUR MOViE
+    </label>
+    <div
+      class="search-container"
+    >
+      <input
+        aria-label="search"
+        class="search-input"
+        name="search"
+        placeholder="What do you want to watch?"
+        type="text"
+        value=""
+      />
+      <button
+        class="search-button"
+      >
+        Search
+      </button>
+    </div>
+  </form>
+</div>
+`;

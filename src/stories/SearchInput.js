@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import "./styles/SearchInput.scss"
+import "./assets/styles/SearchInput.scss"
 
 const SearchInput = (props) => {
 

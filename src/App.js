@@ -1,7 +1,6 @@
-import './App.css';
-import Counter from "./components/Counter"
-import SearchInput from './components/SearchInput';
-import GenreList from './components/GenreList';
+import Counter from "./stories/Counter"
+import SearchInput from './stories/SearchInput';
+import GenreList from './stories/atoms/GenreList';
 import genreList from "./mock/genreData.json"
 import { useState } from 'react';
 

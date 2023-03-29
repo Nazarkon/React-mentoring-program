@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check Counter element behavior Matches snapshot 1`] = `
+<div>
+  <div>
+    <h1>
+      Count: 0
+    </h1>
+    <button
+      style="background-color: rgb(76, 175, 80); color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;"
+    >
+      Increment
+    </button>
+    <button
+      style="background-color: rgb(244, 67, 54); color: white; padding: 15px 32px; margin-left: 10px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px;"
+    >
+      Decrement
+    </button>
+  </div>
+</div>
+`;

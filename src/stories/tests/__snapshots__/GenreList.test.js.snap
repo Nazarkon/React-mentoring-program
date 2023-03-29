@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Check GenreList element behavior Matches snapshot 1`] = `
+<div>
+  <ul
+    class="list-container"
+  >
+    <li
+      class="item-light"
+    >
+      All
+    </li>
+    <li
+      class=""
+    >
+      Documentary
+    </li>
+    <li
+      class=""
+    >
+      Comedy
+    </li>
+    <li
+      class=""
+    >
+      Horror
+    </li>
+    <li
+      class=""
+    >
+      Crime
+    </li>
+  </ul>
+</div>
+`;
