@@ -1,0 +1,17 @@
+.list-container{
+    list-style-type: none;
+    display: flex;
+}
+li{
+    margin: 10px;
+}
+.bg-salmon {
+    background-color: salmon;
+    color: white;
+  }
+  
+.item-light {
+    color: black;
+    transition: color 0.2s ease-in-out;
+    border-bottom: 4px solid #F65261;
+}
