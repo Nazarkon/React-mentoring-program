@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom'
-import Counter from "../Counter"
+import Counter from "./Counter"
 
 describe("Check Counter element behavior", () => {
 

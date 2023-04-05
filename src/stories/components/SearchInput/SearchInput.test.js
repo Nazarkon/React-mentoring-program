@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom'
-import SearchInput from '../SearchInput';
+import SearchInput from './SearchInput';
 
 describe("Check SearchInput element behavior", () => {
 
