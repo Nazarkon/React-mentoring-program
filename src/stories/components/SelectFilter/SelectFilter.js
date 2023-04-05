@@ -8,7 +8,7 @@ const SelectFilter = ({filterOptions,currentSelectedType, onChange}) => {
             <label className="select-label">
                 <span className="select-label-text">SORT BY:</span>
                 <select className="select-component" value={currentSelectedType} onChange={(e) => onChange(e.target.value)}>
-                    {filterOptions.map((option,index) => (
+                    {filterOptions.map((option) => (
                         <option key={option.id} className="select-option" value={option.value}>{option.label}</option>
                     ))}
                 </select>
