@@ -2,10 +2,10 @@ import React from "react";
 
 import MovieDetails from "./MovieDetails";
 
-import filmImage from '../assets/images/Bitmap.png'
+import filmImage from '../../assets/images/Bitmap.png'
 
 export default {
-    title: 'atoms/MovieDetails',
+    title: 'Components/MovieDetails',
     component: MovieDetails,
     argTypes: {
         movieInfo: {

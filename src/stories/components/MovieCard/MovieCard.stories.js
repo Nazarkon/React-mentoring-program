@@ -2,10 +2,10 @@ import React from 'react';
 
 import MovieCard from './MovieCard';
 
-import filmImage from '../assets/images/Bitmap.png'
+import filmImage from '../../assets/images/Bitmap.png'
 
 export default {
-    title: 'atoms/MovieCard',
+    title: 'Components/MovieCard',
     component: MovieCard,
     argTypes: {
         imageUrl: {
@@ -27,7 +27,10 @@ export default {
             control: 'array',
             describe: "List of genres that connected to this film",
             defaultValue: ['Action', 'Adventure']
-        }
+        },
+        handleClick: {
+            action: "clicked",
+        },
     },
 }
 

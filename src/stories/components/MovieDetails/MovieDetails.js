@@ -1,16 +1,16 @@
 import React from "react";
 
-import "../assets/styles/MovieDetails.scss"
+import "./MovieDetails.scss"
+import { createMovieItemsList } from '../../../helpers/MovieItemsHelpers'
 
 const MovieDetails = ({movieInfo}) => {
 
-    const { imageUrl, name, year, rating, duration, description, genreList } = movieInfo
-
-    const createListOfGenres = () => {
-        if(!genreList || !genreList.length) return '-';
-
-        return genreList.join('&');
+    if(!movieInfo || !Object.entries(movieInfo).length) {
+        return <div className="movie-details-error-container">Not Found</div>
     }
+
+
+    const { imageUrl, name, year, rating, duration, description, genreList } = movieInfo
 
     return (
         <div className="movie-details-container">
@@ -22,7 +22,7 @@ const MovieDetails = ({movieInfo}) => {
                         <h4 className="movie-details-name">{name}</h4>
                         <span className="movie-details-rating">{rating}</span>
                     </div>
-                        <span className="movie-details-genres">{createListOfGenres()}</span>
+                        <span className="movie-details-genres">{createMovieItemsList(genreList)}</span>
                     <div className="movie-details-container-subtitle">
                         <span className="movie-details-year">{year}</span>
                         <span className="movie-details-duration">{duration}</span>

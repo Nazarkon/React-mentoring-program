@@ -1,4 +1,4 @@
-import GenreList from "../../src/stories/atoms/GenreList";
+import GenreList from "../../src/stories/components/GenreList/GenreList";
 import genreList from "../../src/mock/genreData.json"
 
 describe('GenreList', () => {

@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import SelectFilter from './SelectFilter'
 
 export default {
-    title: 'atoms/SelectFilter',
+    title: 'Components/SelectFilter',
     component: SelectFilter,
     argTypes: {
         filterOptions: {

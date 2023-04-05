@@ -2,7 +2,7 @@
 
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom'
-import SelectFilter from '../atoms/SelectFilter';
+import SelectFilter from './SelectFilter';
 import { userEvent } from '@storybook/testing-library';
 
 describe('SelectFilter component', () => {

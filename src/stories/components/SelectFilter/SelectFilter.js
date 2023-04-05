@@ -1,6 +1,6 @@
 import React from "react";
 
-import '../assets/styles/SelectFilter.scss'
+import './SelectFilter.scss'
 
 const SelectFilter = ({filterOptions,currentSelectedType, onChange}) => {
 

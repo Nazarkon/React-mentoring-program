@@ -1,15 +1,11 @@
 import React from "react";
-import "../assets/styles/MovieCard.scss";
+import "./MovieCard.scss";
+import { createMovieItemsList } from '../../../helpers/MovieItemsHelpers'
 
-const MovieCard = ({ imageUrl, name, year, genreList }) => {
+const MovieCard = ({ imageUrl, name, year, genreList, handleClick }) => {
 
-    const createListOfGenres = () => {
-        if(!genreList || !genreList.length) return '-';
-
-        return genreList.join('&');
-    }
     return (
-        <div className="movie-card-container">
+        <div className="movie-card-container" onClick={(e) => handleClick(e)}>
             <div className="movie-card-container-image">
                 <img className="movie-card-image" alt="film poster" src={imageUrl}/>
             </div>
@@ -17,7 +13,7 @@ const MovieCard = ({ imageUrl, name, year, genreList }) => {
                 <h4 className="movie-card-title">{name}</h4>
                 <p className="movie-card-year">{year}</p>
             </div>
-            <span className="movie-card-genres">{createListOfGenres()}</span>
+            <span className="movie-card-genres">{createMovieItemsList(genreList)}</span>
         </div>
     )
 }

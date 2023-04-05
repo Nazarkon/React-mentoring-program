@@ -1,7 +1,7 @@
 /* eslint-disable testing-library/prefer-screen-queries */
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom'
-import MovieCard from "../atoms/MovieCard";
+import MovieCard from "./MovieCard";
 
 
 describe("MovieCard component", () => {

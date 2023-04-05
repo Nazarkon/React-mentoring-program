@@ -2,8 +2,8 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom'
-import GenreList from '../atoms/GenreList';
-import genreList from "../../mock/genreData.json"
+import GenreList from './GenreList';
+import genreList from "../../../mock/genreData.json"
 
 describe("Check GenreList element behavior", () => {
 

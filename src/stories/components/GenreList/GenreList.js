@@ -1,5 +1,5 @@
 import React  from "react";
-import "../assets/styles/GenreList.scss"
+import "./GenreList.scss"
 
 const GenreList = (props) => {
 
