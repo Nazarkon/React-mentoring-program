@@ -1,4 +1,4 @@
-import MovieCard from "../../src/stories/atoms/MovieCard";
+import MovieCard from "../../src/stories/components/MovieCard/MovieCard";
 
 describe('MovieCard', () => {
     const imageUrl = 'Bitmap.png';

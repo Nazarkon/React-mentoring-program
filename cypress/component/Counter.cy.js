@@ -1,4 +1,4 @@
-import Counter from '../../src/stories/Counter'
+import Counter from '../../src/stories/components/Counter/Counter'
 
 
 describe('Counter element behavior', () => {
