@@ -11,10 +11,12 @@ export default {
             description: "Array of filter options",
             defaultValue: [
                 {
+                    id: 1,
                     label: 'RELEASE DATE',
                     value: 'date',
                 },
                 {
+                    id: 2,
                     label: 'TITLE',
                     value: 'title',
                 },
