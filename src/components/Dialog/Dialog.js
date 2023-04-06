@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import { Portal } from "react-portal";
-import "@fontsource/montserrat";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
