@@ -10,9 +10,9 @@ const SearchInput = (props) => {
     const handleClick = (e) => {
         e.preventDefault();
         onSearch(searchValue)
-
     }
 
+    
 
     const element = ( 
         <form id="search-form" role="search">

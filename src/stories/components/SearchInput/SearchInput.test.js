@@ -1,8 +1,16 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom'
-import SearchInput from "./SearchInput";
+import SearchInput from './SearchInput';
 
 describe("Check SearchInput element behavior", () => {
+
+    it("Matches snapshot", () => {
+        const { container } = render(
+            <SearchInput/>
+        );
+        expect(container).toMatchSnapshot();
+      });
 
     test("Check that component renders an input with the value equal to initial value passed in props", () => {
         const propValue = "Search something";
@@ -24,9 +32,8 @@ describe("Check SearchInput element behavior", () => {
         const submitButton = screen.getByRole('button');
 
 
-        fireEvent.change(searchInput, { target: { value: "Hello World" } });
-
-        fireEvent.click(submitButton)
+        userEvent.type(searchInput, "Hello World");
+        userEvent.click(submitButton);
 
         expect(searchInput.value).toBe("Hello World");
     })
@@ -38,9 +45,7 @@ describe("Check SearchInput element behavior", () => {
 
         const searchInput = screen.getByLabelText('search');
 
-        fireEvent.change(searchInput, { target: { value: "Hello World" } });
-
-        fireEvent.keyDown(searchInput, { key: 'Enter', code: 'Enter' });
+        userEvent.type(searchInput, "Hello World");
 
         expect(searchInput.value).toBe("Hello World");
     })

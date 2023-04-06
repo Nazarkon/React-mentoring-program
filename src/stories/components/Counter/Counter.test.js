@@ -1,11 +1,18 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom'
-import Counter from "./Counter";
-import { act } from 'react-dom/test-utils';
+import Counter from "./Counter"
 
 describe("Check Counter element behavior", () => {
 
-    test("Test that component renders initial value provided in props", () => {
+    it("Matches snapshot", () => {
+        const { container } = render(
+          <Counter/>
+        );
+        expect(container).toMatchSnapshot();
+      });
+
+    test("Check that component renders initial value provided in props", () => {
 
         const propValue = 2;
 
@@ -26,9 +33,8 @@ describe("Check Counter element behavior", () => {
         expect(countValue).toBe('Count: 0');
 
         const buttonDecrement = screen.getByRole('button', { name: /decrement/i });
-        await act(async () => {
-            buttonDecrement.click();
-        }) 
+
+        userEvent.click(buttonDecrement);
 
         const newCountValue = countElement.textContent;
 
@@ -46,9 +52,7 @@ describe("Check Counter element behavior", () => {
         expect(countValue).toBe('Count: 0');
 
         const buttonDecrement = screen.getByRole('button', { name: /increment/i });
-        await act(async () => {
-         buttonDecrement.click();
-        })
+        userEvent.click(buttonDecrement);
 
         const newCountValue = countElement.textContent;
 
