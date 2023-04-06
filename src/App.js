@@ -2,6 +2,7 @@ import Counter from "./stories/components/Counter/Counter"
 import SearchInput from './stories/components/SearchInput/SearchInput';
 import GenreList from './stories/components/GenreList/GenreList';
 import genreList from "./mock/genreData.json"
+import "@fontsource/montserrat";
 import { useState } from 'react';
 
 function App() {

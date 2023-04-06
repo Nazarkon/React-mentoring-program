@@ -12,7 +12,7 @@ describe('GenreList', () => {
     it('Should displays genre list', () => {
         cy.get('.list-container').should('have.length', 1);
         cy.get('.list-container li').should('have.length', genreList.length);
-        genreList.forEach((genre) => {
+        genreList.forEach((genre) => { 
           cy.get('.list-container li')
             .contains(genre.name)
             .should('be.visible');
