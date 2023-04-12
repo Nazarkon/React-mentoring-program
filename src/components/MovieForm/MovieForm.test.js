@@ -7,57 +7,69 @@ import '@testing-library/jest-dom'
 
 describe('MovieForm', () => {
   const handleSubmitMock = jest.fn();
-  const handleCancelMock = jest.fn();
   const movieInfo = {
     title: 'The Matrix',
     releaseDate: '1999-03-31',
     movieURL: 'https://movie-test/',
-    rating: '8.7',
-    genre: 'Comedy',
+    movieRating: '8.7',
+    genre: 'comedy',
     runtime: '136',
     overview: 'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.'
   };
 
   it("matches snapshot", () => {
     const { container } = render(
-      <MovieForm handleSubmit={handleSubmitMock} handleCancel={handleCancelMock} movieInfo={movieInfo} />);
+      <MovieForm handleSubmit={handleSubmitMock} movieInfo={movieInfo} />);
     expect(container).toMatchSnapshot();
   });
 
-  beforeEach(() => {
-    handleSubmitMock.mockClear();
-    handleCancelMock.mockClear();
+  it("should render the form with movie info", () => {
+    const {getByLabelText} = render(<MovieForm movieInfo={movieInfo} handleSubmit={handleSubmitMock} />);
+    expect(getByLabelText("TITLE")).toHaveValue(movieInfo.title);
+    expect(getByLabelText("Date:")).toHaveValue(movieInfo.releaseDate);
+    expect(getByLabelText("MOVIE URL")).toHaveValue(movieInfo.movieURL);
+    expect(getByLabelText("RATING")).toHaveValue(movieInfo.movieRating);
+    expect(getByLabelText("GENRE")).toHaveValue(movieInfo.genre);
+    expect(getByLabelText("RUNTIME")).toHaveValue(movieInfo.runtime);
+    expect(getByLabelText("OVERVIEW")).toHaveValue(movieInfo.overview);
   });
 
-  test('Should renders the form fields', () => {
-    const {getByLabelText, getByRole}  =  render(<MovieForm handleSubmit={handleSubmitMock} handleCancel={handleCancelMock} movieInfo={movieInfo} />);
-    expect(getByLabelText(/title/i)).toBeInTheDocument();
-    expect(getByLabelText(/date/i)).toBeInTheDocument();
-    expect(getByLabelText(/movie url/i)).toBeInTheDocument();
-    expect(getByLabelText(/rating/i)).toBeInTheDocument();
-    expect(getByLabelText(/genre/i)).toBeInTheDocument();
-    expect(getByLabelText(/runtime/i)).toBeInTheDocument();
-    expect(getByLabelText(/overview/i)).toBeInTheDocument();
-    expect(getByRole('button', { name: /cancel/i })).toBeInTheDocument();
-    expect(getByRole('button', { name: /submit/i })).toBeInTheDocument();
+  it("Should call handleSubmit with form data when submitted", () => {
+    const newMovieInfo = {
+      title: "New The Matrix",
+      date: "1345-04-14",
+      movieURL: "https://movie-test/1",
+      movieRating: "3.5",
+      genre: "comedy",
+      runtime: "122",
+      overview: "This is a new test movie",
+    };
+    const { getByLabelText, getByRole } = render(<MovieForm handleSubmit={handleSubmitMock} />);
+    const titleInput = getByLabelText("TITLE");
+    userEvent.type(titleInput, newMovieInfo.title);
+    const dateInput = getByLabelText("Date:");
+    userEvent.type(dateInput, newMovieInfo.date);
+    const movieURLInput = getByLabelText("MOVIE URL");
+    userEvent.type(movieURLInput, newMovieInfo.movieURL);
+    const ratingInput = getByLabelText("RATING");
+    userEvent.type(ratingInput, newMovieInfo.movieRating);
+    const genreSelect = getByLabelText("GENRE");
+    userEvent.selectOptions(genreSelect, newMovieInfo.genre);
+    const runtimeInput = getByLabelText("RUNTIME");
+    userEvent.type(runtimeInput, newMovieInfo.runtime);
+    const overviewInput = getByLabelText("OVERVIEW");
+    userEvent.type(overviewInput, newMovieInfo.overview);
+    const submitButton = getByRole("button", { name: "Submit" });
+    userEvent.click(submitButton);
+    expect(handleSubmitMock).toHaveBeenCalledWith(newMovieInfo);
   });
 
-  test('Should submits successfully', async () => {
-    const {getByLabelText, getByRole} = render(<MovieForm handleSubmit={handleSubmitMock} handleCancel={handleCancelMock} movieInfo={movieInfo} />);
-    userEvent.type(getByLabelText(/title/i), 'Inception');
-    userEvent.type(getByLabelText(/date/i), '2010-07-16');
-    userEvent.type(getByLabelText(/movie url/i), 'https://movie-test/2');
-    userEvent.type(getByLabelText(/rating/i), '8.8');
-    userEvent.selectOptions(getByLabelText(/genre/i), 'Comedy');
-    userEvent.type(getByLabelText(/runtime/i), '148');
-    userEvent.type(getByLabelText(/overview/i), 'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.');
-    userEvent.click(getByRole('button', { name: /submit/i }));
-    expect(handleSubmitMock).toHaveBeenCalledTimes(1);
-  });
-
-  test('Should clicks cancel button and calls handleCancel', () => {
-    const {getByRole} = render(<MovieForm handleSubmit={handleSubmitMock} handleCancel={handleCancelMock} movieInfo={movieInfo} />);
-    userEvent.click(getByRole('button', { name: /cancel/i }));
-    expect(handleCancelMock).toHaveBeenCalledTimes(1);
+  it("Should reset the form when cancel button is clicked", () => {
+    const { getByLabelText,  getByRole} = render(<MovieForm movieInfo={movieInfo} handleSubmit={handleSubmitMock} />);
+    const titleInput = getByLabelText("TITLE");
+    userEvent.type(titleInput, "New Test Movie");
+    const cancelButton = getByRole("button", { name: "Cancel" });
+    userEvent.click(cancelButton);
+    expect(titleInput).toHaveValue(movieInfo.title);
   });
 });

@@ -1,75 +1,49 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import "./MovieForm.scss"
 
 import genreList from '../../mock/genreListData.json'
 
-const MovieForm = ({movieInfo , handleSubmit, handleCancel}) => {
+const MovieForm = ({movieInfo, handleSubmit}) => {
 
+      const handleSubmitForm = (event) => {
+        event.preventDefault();
+        const data = Object.fromEntries(new FormData(event.target));
+        console.log(data, 'data')
+        handleSubmit(data)
+      }
 
-        const [title, setTitle] = useState(movieInfo?.title || '');
-        const [releaseDate, setReleaseDate] = useState(movieInfo?.releaseDate || '');
-        const [movieURL, setMovieURL] = useState(movieInfo?.movieURL || '');
-        const [rating, setRating] = useState(movieInfo?.rating || '');
-        const [genre, setGenre] = useState(movieInfo?.genre || 'default');
-        const [runtime, setRuntime] = useState(movieInfo?.runtime || '');
-        const [overview, setOverview] = useState(movieInfo?.overview || '');
-        const [formValid, setFormValid] = useState(false);
-
-        useEffect(() => {
-            if (
-              title !== "" &&
-              releaseDate !== "" &&
-              movieURL !== "" &&
-              rating !== "" &&
-              genre !== "default" &&
-              runtime !== "" &&
-              overview !== ""
-            ) {
-              setFormValid(true);
-            } else {
-              setFormValid(false);
-            }
-          }, [title, releaseDate, movieURL, rating, genre, runtime, overview]);
-
-
-          const submitForm = (event) => {
-            event.preventDefault();
-            const formData = {
-              title: title,
-              releaseDate: releaseDate,
-              movieURL: movieURL,
-              rating: rating,
-              genre: genre,
-              runtime: runtime,
-              overview: overview
-            };
-            console.log(formData, 'formData')
-            handleSubmit(formData);
-          }
+      const handleFormReset = (event) => {
+        event.preventDefault();
+        event.target.form.reset();
+        console.log('reset')
+        handleSubmit()
+      };
         
 
     return (
-        <form className="movie-form-container" onSubmit={(event) => submitForm(event)}>
+        <form className="movie-form-container" onSubmit={handleSubmitForm}>
             <div className="movie-form-container-input">
                 <label className="movie-form-label-container movie-form-label-main">
                     <span className="movie-form-label-title">TITLE</span>
                     <input
                     className="movie-form-label-input"
+                    id="title"
+                    name="title"
                     type="text"
                     placeholder="Provide title"
-                    value={title}
-                    onChange={(event) => setTitle(event.target.value)}
+                    defaultValue={movieInfo.title}
                     />
                 </label>
                 <label className="movie-form-label-container-second">
                 <span className="movie-form-label-title">Date:</span>
                     <input
                     className="movie-form-label-input-second"
+                    id="date"
                     type="date"
+                    name="date"
                     placeholder="Select Date"
-                    value={releaseDate}
-                    onChange={(event) => setReleaseDate(event.target.value)}
+                    defaultValue={movieInfo.releaseDate}
                     />
                 </label>
             </div>
@@ -79,9 +53,10 @@ const MovieForm = ({movieInfo , handleSubmit, handleCancel}) => {
                     <input
                     className="movie-form-label-input"
                     type="text"
+                    id="movieURL"
+                    name="movieURL"
                     placeholder="https://"
-                    value={movieURL}
-                    onChange={(event) => setMovieURL(event.target.value)}
+                    defaultValue={movieInfo.movieURL}
                     />
                 </label>
                 <label className="movie-form-label-container">
@@ -89,16 +64,22 @@ const MovieForm = ({movieInfo , handleSubmit, handleCancel}) => {
                     <input
                     className="movie-form-label-input-second"
                     type="text"
+                    id="movieRating"
+                    name="movieRating"
                     placeholder="0.0"
-                    value={rating}
-                    onChange={(event) => setRating(event.target.value)}
+                    defaultValue={movieInfo.movieRating}
                     />
                 </label>
             </div>
             <div className="movie-form-container-input">
                 <label className="movie-form-label-container movie-form-label-main">
                 <span className="movie-form-label-title">GENRE</span>
-                    <select className="movie-form-label-input" value={genre} onChange={(event) => setGenre(event.target.value)}>
+                    <select 
+                        className="movie-form-label-input"
+                        id="genre"
+                        name="genre"
+                        defaultValue={movieInfo.genre}
+                        >
                     {genreList.map((genre) => (
                         <option key={genre.id} value={genre.id}>{genre.name}</option>
                     ))}
@@ -109,29 +90,30 @@ const MovieForm = ({movieInfo , handleSubmit, handleCancel}) => {
                     <input
                     className="movie-form-label-input-second"
                     type="text"
+                    name="runtime"
+                    id="runtime"
                     placeholder="min"
-                    value={runtime}
-                    onChange={(event) => setRuntime(event.target.value)}
+                    defaultValue={movieInfo.runtime}
                     />
                 </label>
             </div>
                 <label className="movie-form-label-container">
                 <span className="movie-form-label-title">OVERVIEW</span>
                     <textarea
+                    id="overview"
+                    name="overview"
                     className="movie-form-label-textarea"
-                    value={overview}
+                    defaultValue={movieInfo.overview}
                     placeholder="Movie description"
-                    onChange={(event) => setOverview(event.target.value)}
                     />
                 </label>
                 <div className="movie-form-container-buttons">
                     <button
-                        onClick={handleCancel}
                         className="movie-form-container-button-cancel" 
-                        type="button"
+                        type="reset"
+                        onClick={handleFormReset}
                     >Cancel</button>
                     <button
-                        disabled={!formValid}
                         className="movie-form-container-button-submit"
                         type="submit"
                     >Submit</button>
@@ -141,3 +123,15 @@ const MovieForm = ({movieInfo , handleSubmit, handleCancel}) => {
 }
 
 export default MovieForm
+
+MovieForm.defaultProps = {
+    movieInfo: {
+        title: '',
+        releaseDate: '',
+        movieURL: '',
+        movieRating: '',
+        genre: '',
+        runtime: '',
+        overview: ''
+    }
+}

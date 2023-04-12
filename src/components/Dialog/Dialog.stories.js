@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import Dialog from "./Dialog";
 import MovieForm from "../MovieForm/MovieForm.js";
+import DialogMessage from "../DialogMessages/DialogMessage";
 
 export default {
     title: 'Components/Dialog',
@@ -30,57 +31,64 @@ const mockedMovieData = {
 const TemplateAddMovie = (args) => {
     const [isOpen, setIsOpen] = useState(true)
 
-    const handleClose = (event) => {
-        event.preventDefault();
+    const handleSubmit = (data) => {
+        console.log(data)
         setIsOpen(!isOpen)
     }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        setIsOpen(!isOpen)
-    }
-    return (<Dialog  
-        title="Add Movie" 
-        isOpen={isOpen} 
-        body={<MovieForm handleCancel={handleClose} handleSubmit={handleSubmit}/>}
-        handleClose={() => setIsOpen(!isOpen)} 
-    />);
+    return (
+        <>
+        {isOpen && (
+            <Dialog  
+                title="Add Movie" 
+                isOpen={isOpen} 
+                body={<MovieForm  handleSubmit={handleSubmit}/>}
+                handleClose={() => setIsOpen(!isOpen)} 
+            />)}
+    </>
+    );
 }
 const TemplateEditMovie = (args) => {
     const [isOpen, setIsOpen] = useState(true);
 
-    const handleClose = (event) => {
-        setIsOpen(!isOpen)
-    }
-
-    const handleSubmit = (event) => {
-        console.log(event)
+    const handleSubmit = (data) => {
+        console.log(data)
         setIsOpen(!isOpen)
     }
 
     return (
+        <>
+        { isOpen && (
         <Dialog  
             title="Edit Movie" 
-            isOpen={isOpen} 
-            body={<MovieForm handleCancel={handleClose} handleSubmit={handleSubmit} movieInfo={mockedMovieData}/>}
+            body={<MovieForm  handleSubmit={handleSubmit} movieInfo={mockedMovieData}/>}
             handleClose={() => setIsOpen(!isOpen)} 
         />
+        )}
+        </>
     )
 }
 const TemplateDeleteMovie = (args) => {
     const [isOpen, setIsOpen] = useState(true)
 
+    const handleSubmit = () => {
+        setIsOpen(!isOpen)
+    }
+
     return (
+        <>
+        {isOpen && (
         <Dialog  
-            title="Add Movie" 
+            title="DELETE MOVIE" 
             isOpen={isOpen}
-            handleClose={() => setIsOpen(!isOpen)} 
-            buttons={[
-                { label: 'Confirm', onClick: () => setIsOpen(!isOpen) },
-            ]} 
-            message="Are you sure you want to delete this movie?" 
-        />
-    )
+            handleClose={() => setIsOpen(!isOpen)}
+            body={<DialogMessage 
+            message={'Are you sure you want to delete this movie?'}
+            buttonText={'Confirm'}
+            handleConfirm={handleSubmit}
+            />
+        }
+        />)}
+    </>)
 }
 
 export const AddMovie = TemplateAddMovie.bind({});

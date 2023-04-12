@@ -11,14 +11,24 @@ export default {
             default: {}
         },
         handleSubmit: {
-            action: "clicked",
-        },
-        handleCancel: {
             action: "clicked"
         }
     },
 }
 
-const Template = (args) => <MovieForm  {...args} />;
+const mockMovieInfo = {
+    title: "Film 1",
+    releaseDate: '2023-11-12',
+    movieURL: 'https://www.overclockers.ua/',
+    movieRating: '12.0',
+    genre: 'Comedy',
+    runtime: '12h',
+    overview: 'Lorem Ipsum'
+}
 
-export const Default = Template.bind({});
+const EmptyFormTemplate = (args) => <MovieForm  {...args} />;
+
+const FillWithData = (args) => <MovieForm movieInfo={mockMovieInfo} handleSubmit={args.handleSubmit}/>
+
+export const EmptyForm = EmptyFormTemplate.bind({});
+export const FilledForm = FillWithData.bind({});

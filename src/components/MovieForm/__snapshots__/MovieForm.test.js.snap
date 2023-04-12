@@ -18,6 +18,8 @@ exports[`MovieForm matches snapshot 1`] = `
         </span>
         <input
           class="movie-form-label-input"
+          id="title"
+          name="title"
           placeholder="Provide title"
           type="text"
           value="The Matrix"
@@ -33,6 +35,8 @@ exports[`MovieForm matches snapshot 1`] = `
         </span>
         <input
           class="movie-form-label-input-second"
+          id="date"
+          name="date"
           placeholder="Select Date"
           type="date"
           value="1999-03-31"
@@ -52,6 +56,8 @@ exports[`MovieForm matches snapshot 1`] = `
         </span>
         <input
           class="movie-form-label-input"
+          id="movieURL"
+          name="movieURL"
           placeholder="https://"
           type="text"
           value="https://movie-test/"
@@ -67,6 +73,8 @@ exports[`MovieForm matches snapshot 1`] = `
         </span>
         <input
           class="movie-form-label-input-second"
+          id="movieRating"
+          name="movieRating"
           placeholder="0.0"
           type="text"
           value="8.7"
@@ -86,6 +94,8 @@ exports[`MovieForm matches snapshot 1`] = `
         </span>
         <select
           class="movie-form-label-input"
+          id="genre"
+          name="genre"
         >
           <option
             value="default"
@@ -98,6 +108,7 @@ exports[`MovieForm matches snapshot 1`] = `
             Documentary
           </option>
           <option
+            selected=""
             value="comedy"
           >
             Comedy
@@ -124,6 +135,8 @@ exports[`MovieForm matches snapshot 1`] = `
         </span>
         <input
           class="movie-form-label-input-second"
+          id="runtime"
+          name="runtime"
           placeholder="min"
           type="text"
           value="136"
@@ -140,6 +153,8 @@ exports[`MovieForm matches snapshot 1`] = `
       </span>
       <textarea
         class="movie-form-label-textarea"
+        id="overview"
+        name="overview"
         placeholder="Movie description"
       >
         A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.
@@ -150,7 +165,7 @@ exports[`MovieForm matches snapshot 1`] = `
     >
       <button
         class="movie-form-container-button-cancel"
-        type="button"
+        type="reset"
       >
         Cancel
       </button>
