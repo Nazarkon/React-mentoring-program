@@ -41,9 +41,10 @@ const TemplateAddMovie = (args) => {
             <Dialog  
                 title="Add Movie" 
                 isOpen={isOpen} 
-                body={<MovieForm  handleSubmit={handleSubmit}/>}
                 handleClose={() => setIsOpen(!isOpen)} 
-            />)}
+            >
+                <MovieForm  handleSubmit={handleSubmit}/>
+            </Dialog>)}
     </>
     );
 }
@@ -60,9 +61,10 @@ const TemplateEditMovie = (args) => {
         { isOpen && (
         <Dialog  
             title="Edit Movie" 
-            body={<MovieForm  handleSubmit={handleSubmit} movieInfo={mockedMovieData}/>}
             handleClose={() => setIsOpen(!isOpen)} 
-        />
+        >
+            <MovieForm  handleSubmit={handleSubmit} movieInfo={mockedMovieData}/>
+        </Dialog>
         )}
         </>
     )
@@ -76,19 +78,22 @@ const TemplateDeleteMovie = (args) => {
 
     return (
         <>
-        {isOpen && (
-        <Dialog  
-            title="DELETE MOVIE" 
-            isOpen={isOpen}
-            handleClose={() => setIsOpen(!isOpen)}
-            body={<DialogMessage 
-            message={'Are you sure you want to delete this movie?'}
-            buttonText={'Confirm'}
-            handleConfirm={handleSubmit}
-            />
+        {
+            isOpen && (
+                <Dialog
+                title="DELETE MOVIE" 
+                handleClose={() => setIsOpen(!isOpen)}
+                >
+                    <DialogMessage 
+                        message={"Are you sure you want to delete this movie?"}
+                        buttonText={'Confirm'}
+                        handleConfirm={handleSubmit}
+                    />
+                </Dialog>
+            )
         }
-        />)}
-    </>)
+        </>
+    )
 }
 
 export const AddMovie = TemplateAddMovie.bind({});

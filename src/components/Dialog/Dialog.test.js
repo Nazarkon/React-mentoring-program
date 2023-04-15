@@ -18,10 +18,15 @@ describe("Dialog component", () => {
         expect(container).toMatchSnapshot();
       });
       it('Should render the dialog with the correct title and body', () => {
-        const { getByText } = render(<Dialog title={title} body={body} handleClose={handleClose} isOpen={true} />);
-    
+        const title = 'Test Title';
+        const content = 'This is a test content.';
+        const { getByText } = render(
+          <Dialog title={title}>
+            <div>{content}</div>
+          </Dialog>
+        );
         expect(getByText(title)).toBeInTheDocument();
-        expect(getByText(body)).toBeInTheDocument();
+        expect(getByText(content)).toBeInTheDocument();
       });
     
       it('Should call the handleClose function when the close icon is clicked', () => {

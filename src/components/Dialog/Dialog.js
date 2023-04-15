@@ -5,16 +5,17 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import "./Dialog.scss"
 
-const Dialog = ({title, body, handleClose}) => {
-
+const Dialog = ({ title, children, handleClose}) => {
   return (
         <Portal>
           <div className="dialog-container">
-              <FontAwesomeIcon onClick={handleClose} className="dialog-close-icon" data-testid="close-icon" icon={faTimes}  style={{ color: 'white' }} />
-            <div className="dialog-container-main">
-              <div className="dialog-title">{title}</div>
-              {body && <div className="dialog-custom">{body}</div>}
-            </div>
+            <FontAwesomeIcon onClick={handleClose} className="dialog-close-icon" data-testid="close-icon" icon={faTimes}  style={{ color: 'white' }} />
+              <div className="dialog-container-main">
+                <div className="dialog-title">{title}</div>
+                  <div className="dialog-custom">
+                    {children}
+                </div>
+              </div>
           </div>
         </Portal>
   );
