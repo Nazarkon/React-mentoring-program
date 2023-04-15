@@ -1,4 +1,4 @@
-import '!style-loader!css-loader!sass-loader!../src/stories/assets/styles/reset.scss';
+import '!style-loader!css-loader!sass-loader!../src/assets/styles/reset.scss';
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {

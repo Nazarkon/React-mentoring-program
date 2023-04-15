@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./MovieDetails.scss"
-import { createMovieItemsList } from '../../../helpers/MovieItemsHelpers'
+import { createMovieItemsList } from '../../helpers/MovieItemsHelpers'
 
 const MovieDetails = ({movieInfo}) => {
 

@@ -1,6 +1,6 @@
-import Counter from "./stories/components/Counter/Counter"
-import SearchInput from './stories/components/SearchInput/SearchInput';
-import GenreList from './stories/components/GenreList/GenreList';
+import Counter from "./components/Counter/Counter"
+import SearchInput from './components/SearchInput/SearchInput';
+import GenreList from './components/GenreList/GenreList';
 import genreList from "./mock/genreData.json"
 import { useState } from 'react';
 

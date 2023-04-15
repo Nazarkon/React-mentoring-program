@@ -1,6 +1,6 @@
 import React from "react";
 import "./MovieCard.scss";
-import { createMovieItemsList } from '../../../helpers/MovieItemsHelpers'
+import { createMovieItemsList } from '../../helpers/MovieItemsHelpers'
 
 const MovieCard = ({ imageUrl, name, year, genreList, handleClick }) => {
 
