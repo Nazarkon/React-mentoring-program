@@ -1,0 +1,27 @@
+[
+  {
+    "id": "all",
+    "name": "All",
+    "is_active": false
+  },
+  {
+    "id": "fantasy",
+    "name": "Fantasy",
+    "is_active": false
+  },
+  {
+    "id": "adventure",
+    "name": "Adventure",
+    "is_active": false
+  },
+  {
+    "id": "romance",
+    "name": "Romance",
+    "is_active": false
+  },
+  {
+    "id": "science_fiction",
+    "name": "Science Fiction",
+    "is_active": false
+  }
+]
