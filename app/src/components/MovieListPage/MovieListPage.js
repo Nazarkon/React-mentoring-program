@@ -9,6 +9,8 @@ import GenreList from '../GenreList/GenreList';
 import SelectFilter from '../SelectFilter/SelectFilter';
 import MovieCard from '../MovieCard/MovieCard';
 import MovieDetails from '../MovieDetails/MovieDetails';
+import { isGenreExist } from '../../helpers/MovieItemsHelpers';
+import { getMovieList, getMovieListById } from '../../api/movie/controller';
 
 // styles
 import './MovieListPage.scss';
@@ -16,113 +18,52 @@ import './MovieListPage.scss';
 // mocked data
 import genreListData from '../../mock/genreData.json';
 import sortByOption from '../../mock/sortByOption.json';
-import listOfGenres from '../../mock/mockOfAllAvailableGenre.json';
-
-const client = axios.create({
-  baseURL: 'http://localhost:4000/movies'
-});
 
 const MovieListPage = () => {
   const [genre, setSelectedGenre] = useState(genreListData[0]);
-  const [sortType, setSortType] = useState(sortByOption[0].value);
-  const [currentSearchValue, setCurrentSearchValue] = useState('');
   const [movieList, setMovieList] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState({});
   const [isMovieDetailsOpen, setMovieDetailsOpen] = useState(false);
+  const [queryPayload, setQueryPayload] = useState({
+    sortBy: sortByOption[0].value,
+    filter: '',
+    searchBy: '',
+    searchString: ''
+  });
 
-  const getMovieList = (params) => {
-    return new Promise((resolve, reject) => {
-      client
-        .get('/', { params })
-        .then((response) => {
-          resolve(response.data.data);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
+  const handleQueryUpdate = (key, value) => {
+    setQueryPayload((prevPayload) => ({
+      ...prevPayload,
+      [key]: value
+    }));
   };
 
-  const getMovieById = (id) => {
-    return new Promise((resolve, reject) => {
-      client
-        .get(`/${id}`)
-        .then((response) => {
-          resolve(response.data);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
-  };
-
-  const filterMovieByGenre = async (genre) => {
+  const filterMovieByGenre = (genre) => {
+    console.log(genre);
     setSelectedGenre(genre);
-    const params = {};
-    if (genre.id !== 'all') {
-      params.filter = genre.name;
-    }
-    getMovieList(params)
-      .then((data) => {
-        setMovieList(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    handleQueryUpdate('genre', genre);
   };
 
   const sortMovie = (type) => {
-    setSortType(type);
-    const params = {
-      sortBy: type
-    };
-
-    getMovieList(params)
-      .then((data) => {
-        setMovieList(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    handleQueryUpdate('sortBy', type);
   };
 
   const searchMovieByTitleOrGenre = (searchString) => {
-    setCurrentSearchValue(searchString);
-    const params = {};
-    const isSearchByGenre = listOfGenres.includes(searchString.toLowerCase());
-    if (isSearchByGenre) {
-      params.searchBy = 'genres';
-      params.search = searchString;
+    if (isGenreExist(searchString)) {
+      setSelectedGenre({ id: searchString.toLowerCase(), name: searchString, is_active: true });
     }
 
-    if (!isSearchByGenre) {
-      params.searchBy = 'title';
-      params.search = searchString;
+    if (!isGenreExist(searchString)) {
+      setSelectedGenre({ id: 'all', name: 'All', is_active: true });
     }
-
-    getMovieList(params)
-      .then((data) => {
-        setMovieList(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    handleQueryUpdate('genre', '');
+    handleQueryUpdate('searchString', searchString);
   };
 
   const selectMovieDetailsInfo = (id) => {
-    getMovieById(id)
+    getMovieListById(id)
       .then((data) => {
-        const { poster_path, title, release_date, vote_average, runtime, overview, genres } = data;
-        const movieObject = {
-          imageUrl: poster_path,
-          name: title,
-          year: release_date,
-          rating: vote_average,
-          duration: runtime,
-          description: overview,
-          genreList: genres
-        };
-        setSelectedMovie(movieObject);
+        setSelectedMovie(data);
         setMovieDetailsOpen(true);
       })
       .catch((error) => {
@@ -131,7 +72,24 @@ const MovieListPage = () => {
   };
 
   useEffect(() => {
-    getMovieList()
+    const ourRequest = axios.CancelToken.source();
+
+    getMovieList(queryPayload, ourRequest)
+      .then((data) => {
+        setMovieList(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+    return () => {
+      ourRequest.cancel();
+    };
+  }, [queryPayload]);
+
+  useEffect(() => {
+    const ourRequest = axios.CancelToken.source();
+    getMovieList(queryPayload, ourRequest)
       .then((data) => {
         setMovieList(data);
       })
@@ -157,7 +115,10 @@ const MovieListPage = () => {
           {isMovieDetailsOpen ? (
             <MovieDetails movieInfo={selectedMovie} />
           ) : (
-            <SearchInput onSearch={searchMovieByTitleOrGenre} defaultValue={currentSearchValue} />
+            <SearchInput
+              onSearch={searchMovieByTitleOrGenre}
+              defaultValue={queryPayload.searchString}
+            />
           )}
         </div>
         <div className="movie-page-film-filter">
@@ -168,7 +129,7 @@ const MovieListPage = () => {
           />
           <SelectFilter
             filterOptions={sortByOption}
-            currentSelectedType={sortType}
+            currentSelectedType={queryPayload.sortBy}
             onChange={sortMovie}
           />
         </div>

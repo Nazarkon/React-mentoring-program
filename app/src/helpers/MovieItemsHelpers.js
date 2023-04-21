@@ -1,3 +1,4 @@
+import listOfGenres from '../mock/mockOfAllAvailableGenre.json';
 export const createMovieItemsList = (movieItemsList) => {
   if (!movieItemsList || !movieItemsList.length) return '-';
 
@@ -5,3 +6,5 @@ export const createMovieItemsList = (movieItemsList) => {
 
   return movieItemsList.join('&');
 };
+
+export const isGenreExist = (searchString) => listOfGenres.includes(searchString.toLowerCase());

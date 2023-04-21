@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './SearchInput.scss';
 
 const SearchInput = (props) => {
   const { defaultValue, onSearch } = props;
 
-  const [searchValue, setSearchValue] = useState(defaultValue || '');
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    onSearch(searchValue);
+  const handleSubmitForm = (event) => {
+    event.preventDefault();
+    const data = Object.fromEntries(new FormData(event.target));
+    onSearch(data.search);
   };
 
   const element = (
-    <form id="search-form" role="search">
+    <form id="search-form" role="search" onSubmit={handleSubmitForm}>
       <label className="search-label">FIND YOUR MOViE</label>
       <div className="search-container">
         <input
@@ -21,11 +20,10 @@ const SearchInput = (props) => {
           className="search-input"
           aria-label="search"
           name="search"
-          value={searchValue}
-          onChange={(event) => setSearchValue(event.target.value)}
+          defaultValue={defaultValue}
           placeholder="What do you want to watch?"
         />
-        <button className="search-button" onClick={(e) => handleClick(e)}>
+        <button type="submit" className="search-button">
           Search
         </button>
       </div>
