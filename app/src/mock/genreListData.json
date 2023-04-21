@@ -1,0 +1,22 @@
+[
+  {
+    "id": "default",
+    "name": "Select Genre"
+  },
+  {
+    "id": "documentary",
+    "name": "Documentary"
+  },
+  {
+    "id": "comedy",
+    "name": "Comedy"
+  },
+  {
+    "id": "horror",
+    "name": "Horror"
+  },
+  {
+    "id": "crime",
+    "name": "Crime"
+  }
+]

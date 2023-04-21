@@ -1,0 +1,16 @@
+.footer-container{
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    background: #424242;
+    padding: 20px 0 20px 0;
+    .footer-title{
+        color: #F65261;
+        .footer-title-first {
+            font-weight: 900;
+        }
+    }
+}
