@@ -7,9 +7,7 @@ const client = axios.create({
 });
 
 export const getMovieList = (payload, ourRequest) => {
-  console.log(ourRequest, 'ourRequest');
   const params = getMovieSerializer(payload.sortBy, payload.genre, payload.searchString);
-  console.log(params);
   return new Promise((resolve, reject) => {
     client
       .get('/', { params, cancelToken: ourRequest.token })

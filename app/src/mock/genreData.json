@@ -1,7 +1,7 @@
 [
   {
     "id": "all",
-    "name": "All",
+    "name": "all",
     "is_active": false
   },
   {
@@ -11,17 +11,17 @@
   },
   {
     "id": "adventure",
-    "name": "Adventure",
+    "name": "adventure",
     "is_active": false
   },
   {
     "id": "romance",
-    "name": "Romance",
+    "name": "romance",
     "is_active": false
   },
   {
     "id": "science_fiction",
-    "name": "Science Fiction",
+    "name": "science Fiction",
     "is_active": false
   }
 ]

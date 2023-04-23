@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 import './Header.scss';
 
 const Header = ({ isMovieDetailsOpen, handleClose }) => {
@@ -20,12 +21,14 @@ const Header = ({ isMovieDetailsOpen, handleClose }) => {
         <strong className="header-title-first">netflix</strong>roulette
       </p>
       {isMovieDetailsOpen ? (
-        <FontAwesomeIcon
-          className="header-icon"
-          icon={faMagnifyingGlass}
-          rotation={90}
-          onClick={handleClose}
-        />
+        <Link to="/">
+          <FontAwesomeIcon
+            className="header-icon"
+            icon={faMagnifyingGlass}
+            rotation={90}
+            onClick={handleClose}
+          />
+        </Link>
       ) : (
         <button className="header-button">+ Add Movie</button>
       )}

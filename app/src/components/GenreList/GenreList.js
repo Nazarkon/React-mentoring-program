@@ -5,6 +5,9 @@ import './GenreList.scss';
 const GenreList = (props) => {
   const { genreList, currentItem, updateList } = props;
 
+  console.log(currentItem, 'currentItem');
+  console.log(genreList, 'genreList');
+
   return (
     <ul className="list-container">
       {genreList.map((item) => (
