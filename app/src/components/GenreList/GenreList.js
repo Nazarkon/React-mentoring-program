@@ -5,8 +5,9 @@ import './GenreList.scss';
 const GenreList = (props) => {
   const { genreList, currentItem, updateList } = props;
 
-  console.log(currentItem, 'currentItem');
-  console.log(genreList, 'genreList');
+  const capitalizeLetter = (word) => {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  };
 
   return (
     <ul className="list-container">
@@ -16,7 +17,7 @@ const GenreList = (props) => {
           className={item.id === currentItem.id ? 'item-light' : ''}
           onClick={() => updateList(item)}
         >
-          {item.name}
+          {capitalizeLetter(item.name)}
         </li>
       ))}
     </ul>

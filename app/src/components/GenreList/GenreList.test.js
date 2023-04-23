@@ -15,20 +15,24 @@ describe('Check GenreList element behavior', () => {
 
     expect(getByText('All')).toBeInTheDocument();
 
-    expect(getByText('Documentary')).toBeInTheDocument();
+    expect(getByText('Fantasy')).toBeInTheDocument();
 
-    expect(getByText('Comedy')).toBeInTheDocument();
+    expect(getByText('Adventure')).toBeInTheDocument();
 
-    expect(getByText('Horror')).toBeInTheDocument();
+    expect(getByText('Romance')).toBeInTheDocument();
 
-    expect(getByText('Crime')).toBeInTheDocument();
+    expect(getByText('Science Fiction')).toBeInTheDocument();
   });
 
   test('Check that component highlights a selected genre passed in props', () => {
     const selectedGenre = genreList[0];
     render(<GenreList genreList={genreList} currentItem={selectedGenre} />);
 
-    const selectedGenreElement = screen.getByText(selectedGenre.name);
+    const capitalizeLetter = (word) => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    };
+
+    const selectedGenreElement = screen.getByText(capitalizeLetter(selectedGenre.name));
 
     expect(selectedGenreElement).toHaveClass('item-light');
   });
@@ -38,15 +42,15 @@ describe('Check GenreList element behavior', () => {
     const onClick = jest.fn();
     render(<GenreList genreList={genreList} currentItem={selectedGenre} updateList={onClick} />);
 
-    const genreElement = screen.getByText('Comedy');
+    const genreElement = screen.getByText('Romance');
 
     userEvent.click(genreElement);
 
     expect(onClick).toHaveBeenCalledTimes(1);
     expect(onClick).toHaveBeenCalledWith({
-      id: 'comedy',
+      id: 'romance',
       is_active: false,
-      name: 'Comedy'
+      name: 'romance'
     });
   });
 });

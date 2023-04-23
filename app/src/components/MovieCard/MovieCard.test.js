@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import MovieCard from './MovieCard';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('MovieCard component', () => {
   const mockData = {
@@ -13,23 +14,27 @@ describe('MovieCard component', () => {
 
   it('matches snapshot', () => {
     const { container } = render(
-      <MovieCard
-        imageUrl={mockData.image}
-        name={mockData.name}
-        year={mockData.year}
-        genreList={mockData.genreList}
-      />
+      <BrowserRouter>
+        <MovieCard
+          imageUrl={mockData.image}
+          name={mockData.name}
+          year={mockData.year}
+          genreList={mockData.genreList}
+        />
+      </BrowserRouter>
     );
     expect(container).toMatchSnapshot();
   });
   it('Check that component renders movie information correctly', () => {
     const { getByAltText, getByText } = render(
-      <MovieCard
-        imageUrl={mockData.image}
-        name={mockData.name}
-        year={mockData.year}
-        genreList={mockData.genreList}
-      />
+      <BrowserRouter>
+        <MovieCard
+          imageUrl={mockData.image}
+          name={mockData.name}
+          year={mockData.year}
+          genreList={mockData.genreList}
+        />
+      </BrowserRouter>
     );
 
     expect(getByAltText('film poster')).toHaveAttribute('src', 'Bitmap.png');
