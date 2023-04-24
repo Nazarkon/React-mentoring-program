@@ -12,8 +12,9 @@ describe('Check SearchInput element behavior', () => {
 
   test('Check that component renders an input with the value equal to initial value passed in props', () => {
     const propValue = 'Search something';
+    const onSearchMock = jest.fn();
 
-    render(<SearchInput defaultValue={propValue} />);
+    render(<SearchInput defaultValue={propValue} onSearch={onSearchMock}/>);
 
     const searchInput = screen.getByLabelText('search');
 

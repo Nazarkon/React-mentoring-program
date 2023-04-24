@@ -55,7 +55,7 @@ const CounterNumber = (props) => {
 };
 
 CounterNumber.propTypes = {
-  defaultValue: PropTypes.number.isRequired
+  defaultValue: PropTypes.number
 };
 
 export default CounterNumber;

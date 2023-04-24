@@ -27,7 +27,7 @@ const GenreList = (props) => {
 GenreList.propTypes = {
   genreList: PropTypes.array.isRequired,
   currentItem: PropTypes.object.isRequired,
-  updateList: PropTypes.func.isRequired
+  updateList: PropTypes.func
 };
 
 export default GenreList;

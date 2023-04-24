@@ -51,19 +51,25 @@ const MovieListPage = () => {
 
   const searchMovieByTitleOrGenre = (searchString) => {
     if (isGenreExist(searchString)) {
+      handleQueryUpdate('genre', searchString.toLowerCase());
       setSelectedGenre({ id: searchString.toLowerCase(), name: searchString, is_active: true });
     }
 
     if (!isGenreExist(searchString)) {
       setSelectedGenre({ id: 'all', name: 'All', is_active: true });
     }
-    searchParams.delete('genre');
     handleQueryUpdate('searchString', searchString);
   };
 
   const selectMovieDetailsInfo = (id) => {
     setMovieDetailsOpen(true);
   };
+
+  useEffect(() => {
+    if (!searchParams.get('genre')) {
+      handleQueryUpdate('genre', 'all');
+    }
+  }, []);
 
   useEffect(() => {
     const ourRequest = axios.CancelToken.source();
@@ -81,6 +87,8 @@ const MovieListPage = () => {
       name: searchParams.get('genre'),
       is_active: false
     });
+
+    console.log(searchParamsFromUrl, 'searchParamsFromUrl');
 
     getMovieList(searchParamsFromUrl, ourRequest)
       .then((data) => {

@@ -16,6 +16,7 @@ describe('MovieCard component', () => {
     const { container } = render(
       <BrowserRouter>
         <MovieCard
+          id={123}
           imageUrl={mockData.image}
           name={mockData.name}
           year={mockData.year}
@@ -29,6 +30,7 @@ describe('MovieCard component', () => {
     const { getByAltText, getByText } = render(
       <BrowserRouter>
         <MovieCard
+          id={123}
           imageUrl={mockData.image}
           name={mockData.name}
           year={mockData.year}

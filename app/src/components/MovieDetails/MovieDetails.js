@@ -13,12 +13,13 @@ const MovieDetails = () => {
   useEffect(() => {
     getMovieListById(id)
       .then((data) => {
+        console.log(data, 'data');
         setMovieInfo(data);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [id]);
 
   return (
     <div className="movie-details-container">

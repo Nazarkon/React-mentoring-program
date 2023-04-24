@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import Counter from '../../src/stories/components/Counter/Counter';
+import Counter from '../../src/components/Counter/Counter';
 import React from 'react';
 
 describe('Counter element behavior', () => {

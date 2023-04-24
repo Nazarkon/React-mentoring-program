@@ -46,13 +46,13 @@ describe('MovieListPage', () => {
   });
 
   it('Should updates query params when searching by title or genre', () => {
-    cy.visit('http://localhost:3000/?sortBy=title&searchString=action');
+    cy.visit('http://localhost:3000/?sortBy=title&searchString=action&genre=action');
 
     cy.get('.search-button').first().click();
 
     cy.url().should('include', 'searchString=action');
     cy.url().should('include', 'sortBy=title');
-    cy.url().should('not.include', 'genre=');
+    cy.url().should('include', 'genre=action');
   });
 
   it('Should see movie-details page if enter by this route', () => {
