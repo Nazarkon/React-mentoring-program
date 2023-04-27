@@ -12,7 +12,7 @@ const SelectFilter = ({ filterOptions, currentSelectedType, onChange }) => {
         value={currentSelectedType}
         onChange={(e) => onChange(e.target.value)}
       >
-        {filterOptions.map((option) => (
+        {filterOptions.map((option, index) => (
           <option key={option.id} className="select-option" value={option.value}>
             {option.label}
           </option>
@@ -25,7 +25,7 @@ const SelectFilter = ({ filterOptions, currentSelectedType, onChange }) => {
 SelectFilter.propTypes = {
   filterOptions: PropTypes.array.isRequired,
   currentSelectedType: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func
 };
 
 export default SelectFilter;

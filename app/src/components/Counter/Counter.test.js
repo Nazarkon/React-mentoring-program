@@ -1,8 +1,9 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import Counter from './Counter';
+import { act } from 'react-dom/test-utils';
 
 describe('Check Counter element behavior', () => {
   it('Matches snapshot', () => {
@@ -10,48 +11,26 @@ describe('Check Counter element behavior', () => {
     expect(container).toMatchSnapshot();
   });
 
-  test('Check that component renders initial value provided in props', () => {
-    const propValue = 2;
-
-    render(<Counter defaultValue={propValue} />);
-
-    const propValueElement = screen.getByText(/count/i);
-
-    expect(propValueElement).toBeInTheDocument();
+  it('should display the default count value', () => {
+    const { getByText } = render(<Counter defaultValue={0} />);
+    expect(getByText('Count: 0')).toBeInTheDocument();
   });
 
-  test('Check if decrement button decrements the displayed value', async () => {
-    render(<Counter />);
-
-    const countElement = screen.getByText(/count/i);
-
-    const countValue = countElement.textContent;
-
-    expect(countValue).toBe('Count: 0');
-
-    const buttonDecrement = screen.getByRole('button', { name: /decrement/i });
-
-    userEvent.click(buttonDecrement);
-
-    const newCountValue = countElement.textContent;
-
-    expect(newCountValue).toBe('Count: -1');
+  it('should increment the count value when the increment button is clicked', () => {
+    const { getByText } = render(<Counter defaultValue={0} />);
+    const incrementButton = getByText('Increment');
+    act(() => {
+      userEvent.click(incrementButton);
+    });
+    expect(getByText('Count: 1')).toBeInTheDocument();
   });
 
-  test('Check if increment button increments the displayed value', async () => {
-    render(<Counter />);
-
-    const countElement = screen.getByText(/count/i);
-
-    const countValue = countElement.textContent;
-
-    expect(countValue).toBe('Count: 0');
-
-    const buttonDecrement = screen.getByRole('button', { name: /increment/i });
-    userEvent.click(buttonDecrement);
-
-    const newCountValue = countElement.textContent;
-
-    expect(newCountValue).toBe('Count: 1');
+  it('should decrement the count value when the decrement button is clicked', () => {
+    const { getByText } = render(<Counter defaultValue={0} />);
+    const decrementButton = getByText('Decrement');
+    act(() => {
+      userEvent.click(decrementButton);
+    });
+    expect(getByText('Count: -1')).toBeInTheDocument();
   });
 });

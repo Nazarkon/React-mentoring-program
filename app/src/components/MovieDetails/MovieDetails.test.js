@@ -12,6 +12,7 @@ describe('MovieDetails component', () => {
       id: 1,
       name: 'Pulp Fiction',
       year: '2003',
+      imageUrl: 'Bitmap.png',
       rating: '8.9',
       duration: '2h 34min',
       description:

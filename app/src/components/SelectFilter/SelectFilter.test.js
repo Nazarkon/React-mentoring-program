@@ -7,10 +7,12 @@ import { userEvent } from '@storybook/testing-library';
 describe('SelectFilter component', () => {
   const mockFilterOptions = [
     {
+      id: '1',
       label: 'RELEASE DATE',
       value: 'date'
     },
     {
+      id: '2',
       label: 'TITLE',
       value: 'title'
     }
