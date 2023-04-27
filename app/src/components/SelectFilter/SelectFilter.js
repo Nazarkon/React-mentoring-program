@@ -12,7 +12,7 @@ const SelectFilter = ({ filterOptions, currentSelectedType, onChange }) => {
         value={currentSelectedType}
         onChange={(e) => onChange(e.target.value)}
       >
-        {filterOptions.map((option, index) => (
+        {filterOptions.map((option) => (
           <option key={option.id} className="select-option" value={option.value}>
             {option.label}
           </option>
