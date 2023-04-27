@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import React from 'react';
-import MovieCard from '../../src/stories/components/MovieCard/MovieCard';
+import MovieCard from '../../src/components/MovieCard/MovieCard';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('MovieCard', () => {
   const imageUrl = 'Bitmap.png';
@@ -9,7 +10,11 @@ describe('MovieCard', () => {
   const genreList = ['Action', 'Adventure'];
 
   beforeEach(() => {
-    cy.mount(<MovieCard imageUrl={imageUrl} name={name} year={year} genreList={genreList} />);
+    cy.mount(
+      <BrowserRouter>
+        <MovieCard imageUrl={imageUrl} name={name} year={year} genreList={genreList} />
+      </BrowserRouter>
+    );
   });
 
   it('Should displays the movie name and year', () => {

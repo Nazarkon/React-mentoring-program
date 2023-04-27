@@ -5,15 +5,19 @@ exports[`MovieCard component matches snapshot 1`] = `
   <div
     class="movie-card-container"
   >
-    <div
-      class="movie-card-container-image"
+    <a
+      href="/movie-details/123"
     >
-      <img
-        alt="film poster"
-        class="movie-card-image"
-        src="Bitmap.png"
-      />
-    </div>
+      <div
+        class="movie-card-container-image"
+      >
+        <img
+          alt="film poster"
+          class="movie-card-image"
+          src="Bitmap.png"
+        />
+      </div>
+    </a>
     <div
       class="movie-card-container-title"
     >

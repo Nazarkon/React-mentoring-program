@@ -5,6 +5,10 @@ import './GenreList.scss';
 const GenreList = (props) => {
   const { genreList, currentItem, updateList } = props;
 
+  const capitalizeLetter = (word) => {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  };
+
   return (
     <ul className="list-container">
       {genreList.map((item) => (
@@ -13,7 +17,7 @@ const GenreList = (props) => {
           className={item.id === currentItem.id ? 'item-light' : ''}
           onClick={() => updateList(item)}
         >
-          {item.name}
+          {capitalizeLetter(item.name)}
         </li>
       ))}
     </ul>
@@ -23,7 +27,7 @@ const GenreList = (props) => {
 GenreList.propTypes = {
   genreList: PropTypes.array.isRequired,
   currentItem: PropTypes.object.isRequired,
-  updateList: PropTypes.func.isRequired
+  updateList: PropTypes.func
 };
 
 export default GenreList;

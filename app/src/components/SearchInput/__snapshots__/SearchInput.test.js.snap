@@ -24,6 +24,7 @@ exports[`Check SearchInput element behavior Matches snapshot 1`] = `
       />
       <button
         class="search-button"
+        type="submit"
       >
         Search
       </button>

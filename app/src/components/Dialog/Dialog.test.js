@@ -12,7 +12,9 @@ describe('Dialog component', () => {
 
   it('matches snapshot', () => {
     const { container } = render(
-      <Dialog title={title} body={body} handleClose={handleClose} isOpen={true} />
+      <Dialog title={title} handleClose={handleClose}>
+        <p>{body}</p>
+      </Dialog>
     );
     expect(container).toMatchSnapshot();
   });
@@ -20,7 +22,7 @@ describe('Dialog component', () => {
     const title = 'Test Title';
     const content = 'This is a test content.';
     const { getByText } = render(
-      <Dialog title={title}>
+      <Dialog title={title} handleClose={handleClose}>
         <div>{content}</div>
       </Dialog>
     );
@@ -29,8 +31,11 @@ describe('Dialog component', () => {
   });
 
   it('Should call the handleClose function when the close icon is clicked', () => {
+    const content = 'This is a test content.';
     const { getByTestId } = render(
-      <Dialog title={title} body={body} handleClose={handleClose} isOpen={true} />
+      <Dialog title={title} handleClose={handleClose}>
+        <div>{content}</div>
+      </Dialog>
     );
 
     const closeIcon = getByTestId('close-icon');

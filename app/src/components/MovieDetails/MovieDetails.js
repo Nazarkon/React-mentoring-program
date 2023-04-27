@@ -1,38 +1,48 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { getMovieListById } from '../../api/movie/controller';
+import { useParams } from 'react-router-dom';
 
 import './MovieDetails.scss';
 import { createMovieItemsList } from '../../helpers/MovieItemsHelpers';
 
-const MovieDetails = ({ movieInfo }) => {
-  if (!movieInfo || !Object.entries(movieInfo).length) {
-    return <div className="movie-details-error-container">Not Found</div>;
-  }
+const MovieDetails = () => {
+  const [movieInfo, setMovieInfo] = useState();
 
-  const { imageUrl, name, year, rating, duration, description, genreList } = movieInfo;
+  const { id } = useParams();
+
+  useEffect(() => {
+    getMovieListById(id)
+      .then((data) => {
+        console.log(data, 'data');
+        setMovieInfo(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [id]);
 
   return (
     <div className="movie-details-container">
       <div className="movie-details-container-image">
-        <img className="movie-card-image" alt="film poster" src={imageUrl} />
+        <img className="movie-card-image" alt="film poster" src={movieInfo?.imageUrl} />
       </div>
       <div className="movie-details-container-description">
         <div className="movie-details-description-title">
-          <h4 className="movie-details-name">{name}</h4>
-          <span className="movie-details-rating">{rating}</span>
+          <h4 className="movie-details-name">{movieInfo?.name}</h4>
+          <span className="movie-details-rating">{movieInfo?.rating}</span>
         </div>
-        <span className="movie-details-genres">{createMovieItemsList(genreList)}</span>
+        <span className="movie-details-genres">{createMovieItemsList(movieInfo?.genreList)}</span>
         <div className="movie-details-container-subtitle">
-          <span className="movie-details-year">{year}</span>
-          <span className="movie-details-duration">{duration}</span>
+          <span className="movie-details-year">{movieInfo?.year}</span>
+          <span className="movie-details-duration">{movieInfo?.duration}</span>
         </div>
-        <p className="movie-details-description">{description}</p>
+        <p className="movie-details-description">{movieInfo?.description}</p>
       </div>
     </div>
   );
 };
 
-MovieDetails.propTypes = {
-  movieInfo: PropTypes.object.isRequired
-};
+// MovieDetails.propTypes = {
+//   movieInfo: PropTypes.object.isRequired
+// };
 export default MovieDetails;

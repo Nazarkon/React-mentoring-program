@@ -15,7 +15,8 @@ describe('MovieListPage', () => {
   });
 
   it('should search movies by title', () => {
-    cy.get('.search-input').type('Fifty Shades Freed');
+    cy.get('.search-input').type('Fifty Shades');
+    cy.get('.search-button').first().click();
     cy.get('.movie-card-container').should('include.text', 'Fifty Shades Freed');
   });
 
@@ -33,5 +34,30 @@ describe('MovieListPage', () => {
     cy.get('.movie-card-container').first().click();
     cy.get('.svg-inline--fa').click();
     cy.get('.search-input').should('be.visible');
+  });
+  it('Should updates query params when selecting genre', () => {
+    cy.visit('http://localhost:3000/?sortBy=title&searchString=Fifty+Shades');
+
+    cy.get('.movie-page-film-filter').contains('Fantasy').click();
+
+    cy.url().should('include', 'genre=');
+    cy.url().should('include', 'sortBy=title');
+    cy.url().should('not.include', 'searchString=');
+  });
+
+  it('Should updates query params when searching by title or genre', () => {
+    cy.visit('http://localhost:3000/?sortBy=title&searchString=action&genre=action');
+
+    cy.get('.search-button').first().click();
+
+    cy.url().should('include', 'searchString=action');
+    cy.url().should('include', 'sortBy=title');
+    cy.url().should('include', 'genre=action');
+  });
+
+  it('Should see movie-details page if enter by this route', () => {
+    cy.visit('http://localhost:3000/movie-details/513296');
+
+    cy.get('.movie-details-container').should('be.visible');
   });
 });

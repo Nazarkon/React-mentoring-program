@@ -1,16 +1,18 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect, useDebugValue } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
+import { useSearchParams, Outlet, useParams } from 'react-router-dom';
 
 // components
 import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 import SearchInput from '../SearchInput/SearchInput';
 import GenreList from '../GenreList/GenreList';
 import SelectFilter from '../SelectFilter/SelectFilter';
 import MovieCard from '../MovieCard/MovieCard';
-import MovieDetails from '../MovieDetails/MovieDetails';
 import { isGenreExist } from '../../helpers/MovieItemsHelpers';
-import { getMovieList, getMovieListById } from '../../api/movie/controller';
+import { getMovieList } from '../../api/movie/controller';
 
 // styles
 import './MovieListPage.scss';
@@ -20,28 +22,27 @@ import genreListData from '../../mock/genreData.json';
 import sortByOption from '../../mock/sortByOption.json';
 
 const MovieListPage = () => {
-  const [genre, setSelectedGenre] = useState(genreListData[0]);
-  const [movieList, setMovieList] = useState([]);
-  const [selectedMovie, setSelectedMovie] = useState({});
-  const [isMovieDetailsOpen, setMovieDetailsOpen] = useState(false);
-  const [queryPayload, setQueryPayload] = useState({
-    sortBy: sortByOption[0].value,
-    filter: '',
-    searchBy: '',
-    searchString: ''
+  const [searchParams, setSearchParams] = useSearchParams({
+    sortBy: sortByOption[0].value
   });
 
+  const params = useParams();
+
+  const [genre, setSelectedGenre] = useState(genreListData[0]);
+  const [movieList, setMovieList] = useState([]);
+  const [isMovieDetailsOpen, setMovieDetailsOpen] = useState(false);
+
   const handleQueryUpdate = (key, value) => {
-    setQueryPayload((prevPayload) => ({
-      ...prevPayload,
-      [key]: value
-    }));
+    setSearchParams((prevParams) => {
+      prevParams.set(key, value);
+      return prevParams;
+    });
   };
 
   const filterMovieByGenre = (genre) => {
-    console.log(genre);
     setSelectedGenre(genre);
-    handleQueryUpdate('genre', genre);
+    searchParams.delete('searchString');
+    handleQueryUpdate('genre', genre.name);
   };
 
   const sortMovie = (type) => {
@@ -50,31 +51,46 @@ const MovieListPage = () => {
 
   const searchMovieByTitleOrGenre = (searchString) => {
     if (isGenreExist(searchString)) {
+      handleQueryUpdate('genre', searchString.toLowerCase());
       setSelectedGenre({ id: searchString.toLowerCase(), name: searchString, is_active: true });
     }
 
     if (!isGenreExist(searchString)) {
       setSelectedGenre({ id: 'all', name: 'All', is_active: true });
     }
-    handleQueryUpdate('genre', '');
     handleQueryUpdate('searchString', searchString);
   };
 
   const selectMovieDetailsInfo = (id) => {
-    getMovieListById(id)
-      .then((data) => {
-        setSelectedMovie(data);
-        setMovieDetailsOpen(true);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    setMovieDetailsOpen(true);
   };
+
+  useEffect(() => {
+    if (!searchParams.get('genre')) {
+      handleQueryUpdate('genre', 'all');
+    }
+  }, []);
 
   useEffect(() => {
     const ourRequest = axios.CancelToken.source();
 
-    getMovieList(queryPayload, ourRequest)
+    const searchParamsFromUrl = {
+      ...searchParams,
+      ...Object.fromEntries(searchParams.entries())
+    };
+
+    if (params.id) {
+      setMovieDetailsOpen(true);
+    }
+    setSelectedGenre({
+      id: searchParams.get('genre'),
+      name: searchParams.get('genre'),
+      is_active: false
+    });
+
+    console.log(searchParamsFromUrl, 'searchParamsFromUrl');
+
+    getMovieList(searchParamsFromUrl, ourRequest)
       .then((data) => {
         setMovieList(data);
       })
@@ -85,18 +101,7 @@ const MovieListPage = () => {
     return () => {
       ourRequest.cancel();
     };
-  }, [queryPayload]);
-
-  useEffect(() => {
-    const ourRequest = axios.CancelToken.source();
-    getMovieList(queryPayload, ourRequest)
-      .then((data) => {
-        setMovieList(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  }, [searchParams]);
 
   return (
     <>
@@ -113,11 +118,12 @@ const MovieListPage = () => {
           }
         >
           {isMovieDetailsOpen ? (
-            <MovieDetails movieInfo={selectedMovie} />
+            // <MovieDetails movieInfo={selectedMovie} />
+            <Outlet />
           ) : (
             <SearchInput
               onSearch={searchMovieByTitleOrGenre}
-              defaultValue={queryPayload.searchString}
+              defaultValue={searchParams.get('searchString')}
             />
           )}
         </div>
@@ -129,7 +135,7 @@ const MovieListPage = () => {
           />
           <SelectFilter
             filterOptions={sortByOption}
-            currentSelectedType={queryPayload.sortBy}
+            currentSelectedType={searchParams.get('sortBy')}
             onChange={sortMovie}
           />
         </div>
@@ -150,6 +156,7 @@ const MovieListPage = () => {
           ))}
         </div>
       </div>
+      <Footer />
     </>
   );
 };
