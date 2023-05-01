@@ -5,7 +5,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import './Header.scss';
 
-const Header = ({ isMovieDetailsOpen, handleClose }) => {
+const Header = ({ isMovieDetailsOpen, handleClose, handleClick }) => {
   const [headerColor, setHeaderColor] = useState('');
 
   const listenScrollEvent = () => {
@@ -30,7 +30,7 @@ const Header = ({ isMovieDetailsOpen, handleClose }) => {
           />
         </Link>
       ) : (
-        <button className="header-button">+ Add Movie</button>
+        <button className="header-button" onClick={handleClick}>+ Add Movie</button>
       )}
     </header>
   );
@@ -38,7 +38,8 @@ const Header = ({ isMovieDetailsOpen, handleClose }) => {
 
 Header.propTypes = {
   isMovieDetailsOpen: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired
+  handleClose: PropTypes.func.isRequired,
+  handleClick: PropTypes.func
 };
 
 export default Header;

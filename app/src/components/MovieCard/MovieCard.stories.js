@@ -1,6 +1,7 @@
 import React from 'react';
 
 import MovieCard from './MovieCard';
+import { BrowserRouter } from 'react-router-dom';
 
 import filmImage from '../../assets/images/Bitmap.png';
 
@@ -34,6 +35,10 @@ export default {
   }
 };
 
-const Template = (args) => <MovieCard {...args} />;
+const Template = (args) => (
+  <BrowserRouter>
+    <MovieCard {...args} />
+  </BrowserRouter>
+);
 
 export const Default = Template.bind({});

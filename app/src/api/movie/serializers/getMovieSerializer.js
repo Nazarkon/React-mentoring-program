@@ -7,8 +7,6 @@ export default (sortType, genre, searchString) => {
     params.sortOrder = 'desc';
   }
 
-  console.log(genre, 'genre');
-
   if (genre && genre !== 'all') {
     params.filter = genre;
   }

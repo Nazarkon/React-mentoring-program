@@ -32,8 +32,7 @@ const mockedMovieData = {
 const TemplateAddMovie = () => {
   const [isOpen, setIsOpen] = useState(true);
 
-  const handleSubmit = (data) => {
-    console.log(data);
+  const handleSubmit = () => {
     setIsOpen(!isOpen);
   };
   return (
@@ -49,8 +48,7 @@ const TemplateAddMovie = () => {
 const TemplateEditMovie = () => {
   const [isOpen, setIsOpen] = useState(true);
 
-  const handleSubmit = (data) => {
-    console.log(data);
+  const handleSubmit = () => {
     setIsOpen(!isOpen);
   };
 
