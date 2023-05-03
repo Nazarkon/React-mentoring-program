@@ -75,8 +75,7 @@ const MovieListPage = ({ searchParamsURL }) => {
 
   const filterMovieByGenre = (genre) => {
     setSelectedGenre(genre);
-    searchParams.delete('searchString');
-    handleQueryUpdate('genre', genre.name);
+    handleQueryUpdate('genre', genre.id);
   };
 
   const sortMovie = (type) => {

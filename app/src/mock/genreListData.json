@@ -4,6 +4,22 @@
     "name": "Select Genre"
   },
   {
+    "id": "fantasy",
+    "name": "Fantasy"
+  },
+  {
+    "id": "adventure",
+    "name": "Adventure"
+  },
+  {
+    "id": "romance",
+    "name": "Romance"
+  },
+  {
+    "id": "science fiction",
+    "name": "Science Fiction"
+  },
+  {
     "id": "documentary",
     "name": "Documentary"
   },
@@ -12,19 +28,7 @@
     "name": "Comedy"
   },
   {
-    "id": "horror",
-    "name": "Horror"
-  },
-  {
-    "id": "crime",
-    "name": "Crime"
-  },
-  {
     "id": "action",
     "name": "Action"
-  },
-  {
-    "id": "romance",
-    "name": "Romance"
   }
 ]

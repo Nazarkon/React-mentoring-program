@@ -25,7 +25,7 @@ const AddMovieForm = () => {
   };
 
   const handleDialogState = () => {
-    navigate('/?sortBy=release_date&genre=all');
+    navigate(-1);
   };
 
   const selectDialogMessage = () => {
@@ -48,7 +48,10 @@ const AddMovieForm = () => {
     if (matchAddMovie) {
       await addMovie(data, ourRequest)
         .then((result) => {
-          navigate(`/movie-details/${result.data.id}`);
+          const searchParams = new URLSearchParams(document.location.search);
+          const sortBy = searchParams.get('sortBy');
+          const genre = searchParams.get('genre');
+          navigate(`/movie-details/${result.data.id}?sortBy=${sortBy}&genre=${genre}`);
         })
         .catch((e) => {
           console.error(e);
@@ -82,6 +85,7 @@ const AddMovieForm = () => {
   useEffect(() => {
     if (!params.id) return;
     getMovieById();
+    console.log(matchDeleteMovie, 'matchDeleteMovie');
   }, [params.id]);
 
   return (
@@ -90,14 +94,18 @@ const AddMovieForm = () => {
         <Dialog title={selectDialogTitle()} handleClose={handleDialogState}>
           {matchDeleteMovie ? (
             <DialogMessage
-              isDelete={matchDeleteMovie}
+              isDelete={matchDeleteMovie.pathname.includes('delete')}
               title={'CONGRATULATIONS !'}
               message={selectDialogMessage()}
               buttonText={'Confirm'}
               handleConfirm={handleFormSubmit}
             />
           ) : (
-            <MovieForm handleSubmit={handleFormSubmit} movieInfo={editMovieData} />
+            <MovieForm
+              handleSubmit={handleFormSubmit}
+              handleClose={handleDialogState}
+              movieInfo={editMovieData}
+            />
           )}
         </Dialog>
       ) : (

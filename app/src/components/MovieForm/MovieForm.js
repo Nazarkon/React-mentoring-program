@@ -7,17 +7,13 @@ import './MovieForm.scss';
 
 import genreList from '../../mock/genreListData.json';
 
-const MovieForm = ({ movieInfo, handleSubmit }) => {
+const MovieForm = ({ movieInfo, handleSubmit, handleClose }) => {
   const handleSubmitForm = (values) => {
     const movieObj = values;
     if (movieInfo.id) {
       movieObj['id'] = movieInfo.id;
     }
     handleSubmit(movieObj);
-  };
-
-  const handleFormReset = () => {
-    handleSubmit();
   };
 
   const initialValue = {
@@ -76,7 +72,11 @@ const MovieForm = ({ movieInfo, handleSubmit }) => {
                 name="releaseDate"
                 placeholder="Select Date"
               />
-              <ErrorMessage name="date" component="div" className="movie-form-error-message" />
+              <ErrorMessage
+                name="releaseDate"
+                component="div"
+                className="movie-form-error-message"
+              />
             </label>
           </div>
           <div className="movie-form-container-input">
@@ -146,7 +146,7 @@ const MovieForm = ({ movieInfo, handleSubmit }) => {
             <button
               className="movie-form-container-button-cancel"
               type="reset"
-              onClick={handleFormReset}
+              onClick={handleClose}
             >
               Cancel
             </button>
@@ -166,7 +166,8 @@ const MovieForm = ({ movieInfo, handleSubmit }) => {
 
 MovieForm.propTypes = {
   movieInfo: PropTypes.object.isRequired,
-  handleSubmit: PropTypes.func.isRequired
+  handleSubmit: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired
 };
 
 export default MovieForm;
