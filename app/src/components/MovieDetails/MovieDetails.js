@@ -13,7 +13,6 @@ const MovieDetails = () => {
   useEffect(() => {
     getMovieListById(id)
       .then((data) => {
-        console.log(data, 'DATA');
         setMovieInfo(data);
       })
       .catch((error) => {

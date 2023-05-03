@@ -2,16 +2,20 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { useParams, useMatch } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './Header.scss';
 
-const Header = ({ isMovieDetailsOpen, handleClose, handleClick }) => {
+const Header = ({ handleClose, handleClick }) => {
   const [headerColor, setHeaderColor] = useState('');
+
+  const params = useParams();
+
+  const matchMovieDetails = useMatch(`/movie-details/${params.id}`);
 
   const listenScrollEvent = () => {
     window.scrollY > 10 ? setHeaderColor('#232323') : setHeaderColor('');
   };
-  // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
     window.addEventListener('scroll', listenScrollEvent);
   });
@@ -20,7 +24,7 @@ const Header = ({ isMovieDetailsOpen, handleClose, handleClick }) => {
       <p className="header-title">
         <strong className="header-title-first">netflix</strong>roulette
       </p>
-      {isMovieDetailsOpen ? (
+      {matchMovieDetails ? (
         <Link to="/">
           <FontAwesomeIcon
             className="header-icon"
@@ -30,15 +34,16 @@ const Header = ({ isMovieDetailsOpen, handleClose, handleClick }) => {
           />
         </Link>
       ) : (
-        <button className="header-button" onClick={handleClick}>+ Add Movie</button>
+        <button className="header-button" onClick={handleClick}>
+          + Add Movie
+        </button>
       )}
     </header>
   );
 };
 
 Header.propTypes = {
-  isMovieDetailsOpen: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired,
+  handleClose: PropTypes.func,
   handleClick: PropTypes.func
 };
 

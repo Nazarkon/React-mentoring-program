@@ -23,9 +23,9 @@ const MovieForm = ({ movieInfo, handleSubmit }) => {
   const initialValue = {
     title: movieInfo.name || '',
     movieURL: movieInfo.imageUrl || '',
-    releaseDate: movieInfo.year || '2020-12-29',
+    releaseDate: movieInfo.year || '',
     movieRating: movieInfo.rating || 0,
-    genre: movieInfo.genreList || '',
+    genre: movieInfo?.genreList ? movieInfo?.genreList[0] : '',
     runtime: movieInfo.duration || 0,
     overview: movieInfo.description || ''
   };
@@ -73,7 +73,7 @@ const MovieForm = ({ movieInfo, handleSubmit }) => {
                 className="movie-form-label-input-second"
                 id="date"
                 type="date"
-                name="date"
+                name="releaseDate"
                 placeholder="Select Date"
               />
               <ErrorMessage name="date" component="div" className="movie-form-error-message" />

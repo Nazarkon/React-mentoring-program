@@ -18,5 +18,13 @@
   {
     "id": "crime",
     "name": "Crime"
+  },
+  {
+    "id": "action",
+    "name": "Action"
+  },
+  {
+    "id": "romance",
+    "name": "Romance"
   }
 ]
