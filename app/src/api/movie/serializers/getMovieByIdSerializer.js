@@ -7,7 +7,7 @@ export default (apiData) => {
     rating: vote_average,
     duration: runtime,
     description: overview,
-    genreList: genres
+    genreList: [genres[0].toLowerCase()]
   };
 
   return movieObject;

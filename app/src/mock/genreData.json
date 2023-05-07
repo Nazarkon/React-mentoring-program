@@ -1,27 +1,34 @@
 [
   {
     "id": "all",
-    "name": "all",
-    "is_active": false
+    "name": "all"
   },
   {
     "id": "fantasy",
-    "name": "Fantasy",
-    "is_active": false
+    "name": "fantasy"
   },
   {
     "id": "adventure",
-    "name": "adventure",
-    "is_active": false
+    "name": "adventure"
   },
   {
     "id": "romance",
-    "name": "romance",
-    "is_active": false
+    "name": "romance"
   },
   {
-    "id": "science_fiction",
-    "name": "science Fiction",
-    "is_active": false
+    "id": "science fiction",
+    "name": "science Fiction"
+  },
+  {
+    "id": "documentary",
+    "name": "documentary"
+  },
+  {
+    "id": "comedy",
+    "name": "comedy"
+  },
+  {
+    "id": "action",
+    "name": "action"
   }
 ]

@@ -1,33 +1,59 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
 import './SearchInput.scss';
 
+import { useLocation, Outlet } from 'react-router-dom';
+
 const SearchInput = (props) => {
   const { defaultValue, onSearch } = props;
+
+  const location = useLocation();
 
   const handleSubmitForm = (event) => {
     event.preventDefault();
     const data = Object.fromEntries(new FormData(event.target));
-    onSearch(data.search);
+    onSearch(parseQuery(data.search));
+  };
+
+  const parseQuery = (string) => {
+    const queryString = location.search;
+
+    const params = new URLSearchParams(queryString);
+
+    const sortBy = params.get('sortBy');
+
+    const genre = params.get('genre');
+
+    const searchParamsFromUrl = {
+      genre,
+      sortBy,
+      searchString: string
+    };
+
+    return searchParamsFromUrl;
   };
 
   const element = (
-    <form id="search-form" role="search" onSubmit={handleSubmitForm}>
-      <label className="search-label">FIND YOUR MOViE</label>
-      <div className="search-container">
-        <input
-          type="text"
-          className="search-input"
-          aria-label="search"
-          name="search"
-          defaultValue={defaultValue}
-          placeholder="What do you want to watch?"
-        />
-        <button type="submit" className="search-button">
-          Search
-        </button>
-      </div>
-    </form>
+    <>
+      <Outlet />
+      <form id="search-form" role="search" onSubmit={handleSubmitForm}>
+        <label className="search-label">FIND YOUR MOViE</label>
+        <div className="search-container">
+          <input
+            type="text"
+            className="search-input"
+            aria-label="search"
+            name="search"
+            defaultValue={defaultValue}
+            placeholder="What do you want to watch?"
+          />
+          <button type="submit" className="search-button">
+            Search
+          </button>
+        </div>
+      </form>
+    </>
   );
   return element;
 };

@@ -16,6 +16,14 @@ export default {
       defaultValue: 'Confirm',
       description: 'Button Text'
     },
+    title: {
+      control: 'text',
+      defaultValue: 'CONGRATULATION!',
+    },
+    isDelete: {
+      control: 'boolean',
+      defaultValue: false
+    },
     handleConfirm: {
       action: 'clicked'
     }

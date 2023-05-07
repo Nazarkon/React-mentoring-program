@@ -25,7 +25,7 @@ const SelectFilter = ({ filterOptions, currentSelectedType, onChange }) => {
 SelectFilter.propTypes = {
   filterOptions: PropTypes.array.isRequired,
   currentSelectedType: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func
 };
 
 export default SelectFilter;

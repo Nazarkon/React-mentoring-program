@@ -1,17 +1,23 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { useSearchParams, Outlet, useParams } from 'react-router-dom';
+import {
+  useSearchParams,
+  Outlet,
+  useNavigate,
+  useLocation,
+  useParams,
+  useMatch
+} from 'react-router-dom';
 
 // components
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import SearchInput from '../SearchInput/SearchInput';
 import GenreList from '../GenreList/GenreList';
 import SelectFilter from '../SelectFilter/SelectFilter';
 import MovieCard from '../MovieCard/MovieCard';
-import { isGenreExist } from '../../helpers/MovieItemsHelpers';
 import { getMovieList } from '../../api/movie/controller';
 
 // styles
@@ -21,16 +27,44 @@ import './MovieListPage.scss';
 import genreListData from '../../mock/genreData.json';
 import sortByOption from '../../mock/sortByOption.json';
 
-const MovieListPage = () => {
+const MovieListPage = ({ searchParamsURL }) => {
   const [searchParams, setSearchParams] = useSearchParams({
     sortBy: sortByOption[0].value
   });
 
+  const location = useLocation();
+
+  const navigate = useNavigate();
+
   const params = useParams();
+
+  const matchMovieDetails = useMatch(`/movie-details/${params.id}`);
 
   const [genre, setSelectedGenre] = useState(genreListData[0]);
   const [movieList, setMovieList] = useState([]);
-  const [isMovieDetailsOpen, setMovieDetailsOpen] = useState(false);
+
+  const handleNavigationEdit = async (id) => {
+    navigate(`/edit/${id}${location.search}`);
+  };
+  const handleNavigationDelete = (id) => {
+    navigate(`/delete/${id}${location.search}`);
+  };
+  const handleNavigationAddMovie = () => {
+    navigate(`/new${location.search}`);
+  };
+
+  const [navigationList] = useState([
+    {
+      id: '1',
+      name: 'Edit',
+      action: handleNavigationEdit
+    },
+    {
+      id: '2',
+      name: 'Delete',
+      action: handleNavigationDelete
+    }
+  ]);
 
   const handleQueryUpdate = (key, value) => {
     setSearchParams((prevParams) => {
@@ -41,29 +75,18 @@ const MovieListPage = () => {
 
   const filterMovieByGenre = (genre) => {
     setSelectedGenre(genre);
-    searchParams.delete('searchString');
-    handleQueryUpdate('genre', genre.name);
+    handleQueryUpdate('genre', genre.id);
   };
 
   const sortMovie = (type) => {
     handleQueryUpdate('sortBy', type);
   };
 
-  const searchMovieByTitleOrGenre = (searchString) => {
-    if (isGenreExist(searchString)) {
-      handleQueryUpdate('genre', searchString.toLowerCase());
-      setSelectedGenre({ id: searchString.toLowerCase(), name: searchString, is_active: true });
+  useEffect(() => {
+    if (searchParamsURL) {
+      setSearchParams(searchParamsURL);
     }
-
-    if (!isGenreExist(searchString)) {
-      setSelectedGenre({ id: 'all', name: 'All', is_active: true });
-    }
-    handleQueryUpdate('searchString', searchString);
-  };
-
-  const selectMovieDetailsInfo = (id) => {
-    setMovieDetailsOpen(true);
-  };
+  }, [searchParamsURL]);
 
   useEffect(() => {
     if (!searchParams.get('genre')) {
@@ -79,16 +102,11 @@ const MovieListPage = () => {
       ...Object.fromEntries(searchParams.entries())
     };
 
-    if (params.id) {
-      setMovieDetailsOpen(true);
-    }
     setSelectedGenre({
       id: searchParams.get('genre'),
       name: searchParams.get('genre'),
       is_active: false
     });
-
-    console.log(searchParamsFromUrl, 'searchParamsFromUrl');
 
     getMovieList(searchParamsFromUrl, ourRequest)
       .then((data) => {
@@ -105,55 +123,46 @@ const MovieListPage = () => {
 
   return (
     <>
-      <Header
-        isMovieDetailsOpen={isMovieDetailsOpen}
-        handleClose={() => setMovieDetailsOpen(false)}
-      />
+      <Header handleClick={handleNavigationAddMovie} />
       <div className="movie-page-container">
         <div
           className={
-            isMovieDetailsOpen
+            matchMovieDetails
               ? 'movie-page-search-color-background'
               : 'movie-page-search-image-background'
           }
         >
-          {isMovieDetailsOpen ? (
-            // <MovieDetails movieInfo={selectedMovie} />
-            <Outlet />
-          ) : (
-            <SearchInput
-              onSearch={searchMovieByTitleOrGenre}
-              defaultValue={searchParams.get('searchString')}
+          <Outlet />
+        </div>
+        <div>
+          <div className="movie-page-film-filter">
+            <GenreList
+              genreList={genreListData}
+              currentItem={genre}
+              updateList={filterMovieByGenre}
             />
-          )}
-        </div>
-        <div className="movie-page-film-filter">
-          <GenreList
-            genreList={genreListData}
-            currentItem={genre}
-            updateList={filterMovieByGenre}
-          />
-          <SelectFilter
-            filterOptions={sortByOption}
-            currentSelectedType={searchParams.get('sortBy')}
-            onChange={sortMovie}
-          />
-        </div>
-        <div className="movie-page-film-counter">
-          <strong>{movieList.length}</strong> movies found
-        </div>
-        <div className="movie-page-film-list">
-          {movieList.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              id={movie.id}
-              imageUrl={movie.poster_path}
-              name={movie.title}
-              year={movie.release_date}
-              genreList={movie.genres}
-              handleClick={selectMovieDetailsInfo}
+            <SelectFilter
+              filterOptions={sortByOption}
+              currentSelectedType={searchParams.get('sortBy')}
+              onChange={sortMovie}
             />
-          ))}
+          </div>
+          <div className="movie-page-film-counter">
+            <strong>{movieList.length}</strong> movies found
+          </div>
+          <div className="movie-page-film-list">
+            {movieList.map((movie) => (
+              <MovieCard
+                key={movie.id}
+                id={movie.id}
+                imageUrl={movie.poster_path}
+                name={movie.title}
+                year={movie.release_date}
+                genreList={movie.genres}
+                navigationList={navigationList}
+              />
+            ))}
+          </div>
         </div>
       </div>
       <Footer />

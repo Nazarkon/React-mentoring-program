@@ -1,4 +1,3 @@
-import { isGenreExist } from '../../../helpers/MovieItemsHelpers';
 export default (sortType, genre, searchString) => {
   const params = {};
 
@@ -7,22 +6,13 @@ export default (sortType, genre, searchString) => {
     params.sortOrder = 'desc';
   }
 
-  console.log(genre, 'genre');
-
   if (genre && genre !== 'all') {
     params.filter = genre;
   }
 
   if (searchString) {
-    if (isGenreExist(searchString)) {
-      params.searchBy = 'genres';
-      params.search = searchString;
-    }
-
-    if (!isGenreExist(searchString)) {
-      params.searchBy = 'title';
-      params.search = searchString;
-    }
+    params.searchBy = 'title';
+    params.search = searchString;
   }
 
   return params;
