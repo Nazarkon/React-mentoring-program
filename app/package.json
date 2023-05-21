@@ -14,8 +14,7 @@
     "lint": "eslint --fix --ext .js,.jsx .",
     "jest": "jest --watch a",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "prepare": "husky install"
+    "build-storybook": "storybook build"
   },
   "keywords": [],
   "author": "",
