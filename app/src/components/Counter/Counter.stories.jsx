@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Counter from '../../components/Counter/Counter';
+import Counter from './Counter';
 
 export default {
   title: 'Components/Counter',
@@ -10,11 +10,13 @@ export default {
     defaultValue: {
       control: 'number',
       description: 'Default counter value',
-      defaultValue: 2
-    }
-  }
+      defaultValue: 2,
+    },
+  },
 };
 
-const Template = (args) => <Counter {...args} />;
+function Template(args) {
+  return <Counter {...args} />;
+}
 
 export const Default = Template.bind({});

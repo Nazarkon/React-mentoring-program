@@ -9,12 +9,12 @@ export default {
     message: {
       control: 'text',
       defaultValue: 'Are you sure you want to delete this movie?',
-      description: 'Text in dialog message'
+      description: 'Text in dialog message',
     },
     buttonText: {
       control: 'text',
       defaultValue: 'Confirm',
-      description: 'Button Text'
+      description: 'Button Text',
     },
     title: {
       control: 'text',
@@ -22,23 +22,26 @@ export default {
     },
     isDelete: {
       control: 'boolean',
-      defaultValue: false
+      defaultValue: false,
     },
     handleConfirm: {
-      action: 'clicked'
-    }
-  }
+      action: 'clicked',
+    },
+  },
 };
 
 const divStyle = {
   maxWidth: '360px',
-  backgroundColor: '#E4E4E4'
+  backgroundColor: '#E4E4E4',
 };
 
-const Template = (args) => (
-  <div style={divStyle}>
-    <DialogMessage {...args} />{' '}
-  </div>
-);
+function Template(args) {
+  return (
+    <div style={divStyle}>
+      <DialogMessage {...args} />
+      {' '}
+    </div>
+  );
+}
 
 export const Default = Template.bind({});

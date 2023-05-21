@@ -14,29 +14,29 @@ export default {
         {
           id: 'all',
           name: 'All',
-          is_active: false
+          is_active: false,
         },
         {
           id: 'documentary',
           name: 'Documentary',
-          is_active: false
+          is_active: false,
         },
         {
           id: 'comedy',
           name: 'Comedy',
-          is_active: false
+          is_active: false,
         },
         {
           id: 'horror',
           name: 'Horror',
-          is_active: false
+          is_active: false,
         },
         {
           id: 'crime',
           name: 'Crime',
-          is_active: false
-        }
-      ]
+          is_active: false,
+        },
+      ],
     },
     currentItem: {
       control: 'object',
@@ -44,13 +44,13 @@ export default {
       defaultValue: {
         id: 'all',
         name: 'All',
-        is_active: false
-      }
-    }
-  }
+        is_active: false,
+      },
+    },
+  },
 };
 
-const Template = (args) => {
+function Template(args) {
   const [currentItem, setCurrentItem] = useState(args.currentItem);
 
   const updateList = (item) => {
@@ -58,7 +58,7 @@ const Template = (args) => {
   };
 
   return <GenreList {...args} currentItem={currentItem} updateList={updateList} />;
-};
+}
 
 export const Default = Template.bind({});
 
@@ -67,32 +67,32 @@ Default.args = {
     {
       id: 'all',
       name: 'All',
-      is_active: false
+      is_active: false,
     },
     {
       id: 'documentary',
       name: 'Documentary',
-      is_active: false
+      is_active: false,
     },
     {
       id: 'comedy',
       name: 'Comedy',
-      is_active: false
+      is_active: false,
     },
     {
       id: 'horror',
       name: 'Horror',
-      is_active: false
+      is_active: false,
     },
     {
       id: 'crime',
       name: 'Crime',
-      is_active: false
-    }
+      is_active: false,
+    },
   ],
   currentItem: {
     id: 'all',
     name: 'All',
-    is_active: false
-  }
+    is_active: false,
+  },
 };

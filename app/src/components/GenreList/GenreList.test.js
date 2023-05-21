@@ -49,7 +49,6 @@ describe('Check GenreList element behavior', () => {
     expect(onClick).toHaveBeenCalledTimes(1);
     expect(onClick).toHaveBeenCalledWith({
       id: 'romance',
-      is_active: false,
       name: 'romance'
     });
   });

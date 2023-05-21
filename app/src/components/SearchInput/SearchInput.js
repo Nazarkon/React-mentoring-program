@@ -5,16 +5,10 @@ import './SearchInput.scss';
 
 import { useLocation, Outlet } from 'react-router-dom';
 
-const SearchInput = (props) => {
+function SearchInput(props) {
   const { defaultValue, onSearch } = props;
 
   const location = useLocation();
-
-  const handleSubmitForm = (event) => {
-    event.preventDefault();
-    const data = Object.fromEntries(new FormData(event.target));
-    onSearch(parseQuery(data.search));
-  };
 
   const parseQuery = (string) => {
     const queryString = location.search;
@@ -28,10 +22,16 @@ const SearchInput = (props) => {
     const searchParamsFromUrl = {
       genre,
       sortBy,
-      searchString: string
+      searchString: string,
     };
 
     return searchParamsFromUrl;
+  };
+
+  const handleSubmitForm = (event) => {
+    event.preventDefault();
+    const data = Object.fromEntries(new FormData(event.target));
+    onSearch(parseQuery(data.search));
   };
 
   const element = (
@@ -56,11 +56,11 @@ const SearchInput = (props) => {
     </>
   );
   return element;
-};
+}
 
 SearchInput.propTypes = {
   defaultValue: PropTypes.string,
-  onSearch: PropTypes.func
+  onSearch: PropTypes.func,
 };
 
 export default SearchInput;

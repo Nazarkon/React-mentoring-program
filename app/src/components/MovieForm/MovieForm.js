@@ -1,17 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import {
+  Formik, Field, Form, ErrorMessage,
+} from 'formik';
 import * as Yup from 'yup';
 
 import './MovieForm.scss';
 
 import genreList from '../../mock/genreListData.json';
 
-const MovieForm = ({ movieInfo, handleSubmit, handleClose }) => {
+function MovieForm({ movieInfo, handleSubmit, handleClose }) {
   const handleSubmitForm = (values) => {
     const movieObj = values;
     if (movieInfo.id) {
-      movieObj['id'] = movieInfo.id;
+      movieObj.id = movieInfo.id;
     }
     handleSubmit(movieObj);
   };
@@ -23,7 +25,7 @@ const MovieForm = ({ movieInfo, handleSubmit, handleClose }) => {
     movieRating: movieInfo.rating || 0,
     genre: movieInfo?.genreList ? movieInfo?.genreList[0] : '',
     runtime: movieInfo.duration || 0,
-    overview: movieInfo.description || ''
+    overview: movieInfo.description || '',
   };
 
   const movieFormSchema = Yup.object().shape({
@@ -40,7 +42,7 @@ const MovieForm = ({ movieInfo, handleSubmit, handleClose }) => {
       .typeError('Runtime must be a number')
       .integer('Runtime must be a whole number')
       .required('Runtime is required'),
-    overview: Yup.string().required('Overview is required')
+    overview: Yup.string().required('Overview is required'),
   });
 
   return (
@@ -145,7 +147,7 @@ const MovieForm = ({ movieInfo, handleSubmit, handleClose }) => {
           <div className="movie-form-container-buttons">
             <button
               className="movie-form-container-button-cancel"
-              type="reset"
+              type="button"
               onClick={handleClose}
             >
               Cancel
@@ -162,12 +164,12 @@ const MovieForm = ({ movieInfo, handleSubmit, handleClose }) => {
       )}
     </Formik>
   );
-};
+}
 
 MovieForm.propTypes = {
-  movieInfo: PropTypes.object.isRequired,
+  movieInfo: PropTypes.object,
   handleSubmit: PropTypes.func.isRequired,
-  handleClose: PropTypes.func.isRequired
+  handleClose: PropTypes.func.isRequired,
 };
 
 export default MovieForm;
@@ -180,6 +182,6 @@ MovieForm.defaultProps = {
     movieRating: '',
     genre: '',
     runtime: '',
-    overview: ''
-  }
+    overview: '',
+  },
 };

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './SelectFilter.scss';
 
-const SelectFilter = ({ filterOptions, currentSelectedType, onChange }) => {
+function SelectFilter({ filterOptions, currentSelectedType, onChange }) {
   return (
     <label className="select-label">
       <span className="select-label-text">SORT BY:</span>
@@ -20,12 +20,12 @@ const SelectFilter = ({ filterOptions, currentSelectedType, onChange }) => {
       </select>
     </label>
   );
-};
+}
 
 SelectFilter.propTypes = {
   filterOptions: PropTypes.array.isRequired,
   currentSelectedType: PropTypes.string.isRequired,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
 };
 
 export default SelectFilter;

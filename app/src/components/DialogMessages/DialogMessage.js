@@ -4,7 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import './DialogMessage.scss';
 
-const DialogMessage = ({ message, buttonText, handleConfirm, isDelete, title }) => {
+function DialogMessage({
+  message, buttonText, handleConfirm, isDelete, title,
+}) {
   return (
     <div className="dialog-message-container">
       {!isDelete ? (
@@ -19,21 +21,21 @@ const DialogMessage = ({ message, buttonText, handleConfirm, isDelete, title }) 
       ) : (
         <>
           {message && <div className="dialog-message-text">{message}</div>}
-          <button className="dialog-message-button" onClick={handleConfirm}>
+          <button className="dialog-message-button" type="button" onClick={handleConfirm}>
             {buttonText}
           </button>
         </>
       )}
     </div>
   );
-};
+}
 
 DialogMessage.propTypes = {
   message: PropTypes.string.isRequired,
   buttonText: PropTypes.string.isRequired,
   handleConfirm: PropTypes.func.isRequired,
   title: PropTypes.string,
-  isDelete: PropTypes.bool.isRequired
+  isDelete: PropTypes.bool.isRequired,
 };
 
 export default DialogMessage;

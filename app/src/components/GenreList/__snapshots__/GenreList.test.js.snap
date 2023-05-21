@@ -30,6 +30,21 @@ exports[`Check GenreList element behavior Matches snapshot 1`] = `
     >
       Science Fiction
     </li>
+    <li
+      class=""
+    >
+      Documentary
+    </li>
+    <li
+      class=""
+    >
+      Comedy
+    </li>
+    <li
+      class=""
+    >
+      Action
+    </li>
   </ul>
 </div>
 `;

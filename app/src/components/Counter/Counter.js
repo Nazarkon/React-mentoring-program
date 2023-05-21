@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const CounterNumber = (props) => {
+function CounterNumber(props) {
   const { defaultValue } = props;
 
   const [number, setCount] = useState(defaultValue || 0);
@@ -22,7 +22,7 @@ const CounterNumber = (props) => {
     textAlign: 'center',
     textDecoration: 'none',
     display: 'inline-block',
-    fontSize: '16px'
+    fontSize: '16px',
   };
 
   const DecrementButtonStyle = {
@@ -34,7 +34,7 @@ const CounterNumber = (props) => {
     textAlign: 'center',
     textDecoration: 'none',
     display: 'inline-block',
-    fontSize: '16px'
+    fontSize: '16px',
   };
 
   return React.createElement(
@@ -43,19 +43,19 @@ const CounterNumber = (props) => {
     React.createElement('h1', null, `Count: ${number}`),
     React.createElement(
       'button',
-      { style: IncrementButtonStyle, onClick: incrementValue },
-      'Increment'
+      { style: IncrementButtonStyle, onClick: incrementValue, type: 'button' },
+      'Increment',
     ),
     React.createElement(
       'button',
-      { style: DecrementButtonStyle, onClick: decrementValue },
-      'Decrement'
-    )
+      { style: DecrementButtonStyle, onClick: decrementValue, type: 'button' },
+      'Decrement',
+    ),
   );
-};
+}
 
 CounterNumber.propTypes = {
-  defaultValue: PropTypes.number
+  defaultValue: PropTypes.number.isRequired,
 };
 
 export default CounterNumber;

@@ -5,9 +5,11 @@ import DotsMenu from './DotsMenu';
 export default {
   title: 'Components/DotsMenu',
   component: DotsMenu,
-  argTypes: {}
+  argTypes: {},
 };
 
-const Template = (args) => <DotsMenu {...args} />;
+function Template(args) {
+  return <DotsMenu {...args} />;
+}
 
 export const Default = Template.bind({});

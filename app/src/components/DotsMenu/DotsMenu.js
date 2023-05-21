@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import './DotsMenu.scss';
 
-const DotsMenu = ({ navigationList, movieID }) => {
+function DotsMenu({ navigationList, movieID }) {
   const [isVisible, setVisibility] = useState(false);
 
   return (
@@ -17,9 +17,9 @@ const DotsMenu = ({ navigationList, movieID }) => {
           setVisibility(true);
         }}
       >
-        <div className="dot-menu-container-more-button-dot"></div>
-        <div className="dot-menu-container-more-button-dot"></div>
-        <div className="dot-menu-container-more-button-dot"></div>
+        <div className="dot-menu-container-more-button-dot" />
+        <div className="dot-menu-container-more-button-dot" />
+        <div className="dot-menu-container-more-button-dot" />
       </div>
       {isVisible ? (
         <div className="dot-menu-portal-container">
@@ -48,6 +48,6 @@ const DotsMenu = ({ navigationList, movieID }) => {
       ) : null}
     </div>
   );
-};
+}
 
 export default DotsMenu;

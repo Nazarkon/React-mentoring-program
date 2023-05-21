@@ -3,6 +3,7 @@
 exports[`MovieForm matches snapshot 1`] = `
 <div>
   <form
+    action="#"
     class="movie-form-container"
   >
     <div
@@ -36,7 +37,7 @@ exports[`MovieForm matches snapshot 1`] = `
         <input
           class="movie-form-label-input-second"
           id="date"
-          name="date"
+          name="releaseDate"
           placeholder="Select Date"
           type="date"
           value="1999-03-31"
@@ -76,7 +77,7 @@ exports[`MovieForm matches snapshot 1`] = `
           id="movieRating"
           name="movieRating"
           placeholder="0.0"
-          type="text"
+          type="number"
           value="8.7"
         />
       </label>
@@ -103,25 +104,39 @@ exports[`MovieForm matches snapshot 1`] = `
             Select Genre
           </option>
           <option
+            value="fantasy"
+          >
+            Fantasy
+          </option>
+          <option
+            value="adventure"
+          >
+            Adventure
+          </option>
+          <option
+            value="romance"
+          >
+            Romance
+          </option>
+          <option
+            value="science fiction"
+          >
+            Science Fiction
+          </option>
+          <option
             value="documentary"
           >
             Documentary
           </option>
           <option
-            selected=""
             value="comedy"
           >
             Comedy
           </option>
           <option
-            value="horror"
+            value="action"
           >
-            Horror
-          </option>
-          <option
-            value="crime"
-          >
-            Crime
+            Action
           </option>
         </select>
       </label>
@@ -138,7 +153,7 @@ exports[`MovieForm matches snapshot 1`] = `
           id="runtime"
           name="runtime"
           placeholder="min"
-          type="text"
+          type="number"
           value="136"
         />
       </label>
@@ -165,7 +180,7 @@ exports[`MovieForm matches snapshot 1`] = `
     >
       <button
         class="movie-form-container-button-cancel"
-        type="reset"
+        type="button"
       >
         Cancel
       </button>

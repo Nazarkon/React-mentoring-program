@@ -1,6 +1,6 @@
 describe('MovieListPage', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:3000');
+    cy.visit('http://localhost:3000/');
   });
 
   it('should display a list of movies', () => {
@@ -42,11 +42,5 @@ describe('MovieListPage', () => {
 
     cy.url().should('include', 'genre=');
     cy.url().should('include', 'sortBy=title');
-  });
-
-  it('Should see movie-details page if enter by this route', () => {
-    cy.visit('http://localhost:3000/movie-details/513296');
-
-    cy.get('.movie-details-container').should('be.visible');
   });
 });

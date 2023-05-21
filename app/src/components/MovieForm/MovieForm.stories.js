@@ -8,12 +8,12 @@ export default {
   argTypes: {
     movieInfo: {
       content: 'object',
-      default: {}
+      default: {},
     },
     handleSubmit: {
-      action: 'clicked'
-    }
-  }
+      action: 'clicked',
+    },
+  },
 };
 
 const mockMovieInfo = {
@@ -23,14 +23,16 @@ const mockMovieInfo = {
   movieRating: '12.0',
   genre: 'Comedy',
   runtime: '12h',
-  overview: 'Lorem Ipsum'
+  overview: 'Lorem Ipsum',
 };
 
-const EmptyFormTemplate = (args) => <MovieForm {...args} />;
+function EmptyFormTemplate(args) {
+  return <MovieForm {...args} />;
+}
 
-const FillWithData = (args) => (
-  <MovieForm movieInfo={mockMovieInfo} handleSubmit={args.handleSubmit} />
-);
+function FillWithData(args) {
+  return <MovieForm movieInfo={mockMovieInfo} handleSubmit={args.handleSubmit} />;
+}
 
 export const EmptyForm = EmptyFormTemplate.bind({});
 export const FilledForm = FillWithData.bind({});

@@ -3,10 +3,14 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import SearchInput from './SearchInput';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('Check SearchInput element behavior', () => {
   it('Matches snapshot', () => {
-    const { container } = render(<SearchInput />);
+    const { container } = render(
+    <BrowserRouter>
+    <SearchInput />
+    </BrowserRouter>);
     expect(container).toMatchSnapshot();
   });
 
@@ -14,7 +18,9 @@ describe('Check SearchInput element behavior', () => {
     const propValue = 'Search something';
     const onSearchMock = jest.fn();
 
-    render(<SearchInput defaultValue={propValue} onSearch={onSearchMock}/>);
+    render(<BrowserRouter>
+    <SearchInput defaultValue={propValue} onSearch={onSearchMock}/>
+    </BrowserRouter>);
 
     const searchInput = screen.getByLabelText('search');
 
@@ -24,7 +30,9 @@ describe('Check SearchInput element behavior', () => {
   test('Check that after typing to the input and a click event on the Submit button, the onChange prop is called with proper value', () => {
     const onSearchMock = jest.fn();
 
-    render(<SearchInput onSearch={onSearchMock} />);
+    render(<BrowserRouter>
+    <SearchInput onSearch={onSearchMock} />
+    </BrowserRouter>);
 
     const searchInput = screen.getByLabelText('search');
 
@@ -39,7 +47,9 @@ describe('Check SearchInput element behavior', () => {
   test('Check that after typing to the input and pressing Enter key, the onChange prop is called with proper value', () => {
     const onSearchMock = jest.fn();
 
-    render(<SearchInput onSearch={onSearchMock} />);
+    render(<BrowserRouter>
+    <SearchInput onSearch={onSearchMock} />
+    </BrowserRouter>);
 
     const searchInput = screen.getByLabelText('search');
 

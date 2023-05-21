@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Layout.scss';
 
-function Layout({ children }) {
+const Layout = ({ children }) => {
   return <main className="wrapper">{children}</main>;
-}
+};
 
 Layout.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.element.isRequired
 };
 
 export default Layout;

@@ -13,24 +13,24 @@ export default {
         {
           id: 1,
           label: 'RELEASE DATE',
-          value: 'date'
+          value: 'date',
         },
         {
           id: 2,
           label: 'TITLE',
-          value: 'title'
-        }
-      ]
+          value: 'title',
+        },
+      ],
     },
     currentSelectedType: {
       control: 'text',
       description: 'Current selected sort type',
-      defaultValue: 'title'
-    }
-  }
+      defaultValue: 'title',
+    },
+  },
 };
 
-const Template = (args) => {
+function Template(args) {
   const [currentItem, setCurrentItem] = useState(args.currentSelectedType);
 
   const handleChange = (value) => {
@@ -38,6 +38,6 @@ const Template = (args) => {
   };
 
   return <SelectFilter {...args} currentSelectedType={currentItem} onChange={handleChange} />;
-};
+}
 
 export const Default = Template.bind({});

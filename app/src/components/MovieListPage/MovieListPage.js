@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -9,7 +10,7 @@ import {
   useNavigate,
   useLocation,
   useParams,
-  useMatch
+  useMatch,
 } from 'react-router-dom';
 
 // components
@@ -27,9 +28,9 @@ import './MovieListPage.scss';
 import genreListData from '../../mock/genreData.json';
 import sortByOption from '../../mock/sortByOption.json';
 
-const MovieListPage = ({ searchParamsURL }) => {
+function MovieListPage({ searchParamsURL }) {
   const [searchParams, setSearchParams] = useSearchParams({
-    sortBy: sortByOption[0].value
+    sortBy: sortByOption[0].value,
   });
 
   const location = useLocation();
@@ -57,13 +58,13 @@ const MovieListPage = ({ searchParamsURL }) => {
     {
       id: '1',
       name: 'Edit',
-      action: handleNavigationEdit
+      action: handleNavigationEdit,
     },
     {
       id: '2',
       name: 'Delete',
-      action: handleNavigationDelete
-    }
+      action: handleNavigationDelete,
+    },
   ]);
 
   const handleQueryUpdate = (key, value) => {
@@ -99,13 +100,13 @@ const MovieListPage = ({ searchParamsURL }) => {
 
     const searchParamsFromUrl = {
       ...searchParams,
-      ...Object.fromEntries(searchParams.entries())
+      ...Object.fromEntries(searchParams.entries()),
     };
 
     setSelectedGenre({
       id: searchParams.get('genre'),
       name: searchParams.get('genre'),
-      is_active: false
+      is_active: false,
     });
 
     getMovieList(searchParamsFromUrl, ourRequest)
@@ -148,7 +149,9 @@ const MovieListPage = ({ searchParamsURL }) => {
             />
           </div>
           <div className="movie-page-film-counter">
-            <strong>{movieList.length}</strong> movies found
+            <strong>{movieList.length}</strong>
+            {' '}
+            movies found
           </div>
           <div className="movie-page-film-list">
             {movieList.map((movie) => (
@@ -168,6 +171,6 @@ const MovieListPage = ({ searchParamsURL }) => {
       <Footer />
     </>
   );
-};
+}
 
 export default MovieListPage;

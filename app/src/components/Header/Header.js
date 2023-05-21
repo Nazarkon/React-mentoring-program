@@ -1,12 +1,12 @@
+/* eslint-disable no-unused-expressions */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { useParams, useMatch } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { useParams, useMatch, Link } from 'react-router-dom';
 import './Header.scss';
 
-const Header = ({ handleClose, handleClick }) => {
+function Header({ handleClose, handleClick }) {
   const [headerColor, setHeaderColor] = useState('');
 
   const params = useParams();
@@ -22,7 +22,8 @@ const Header = ({ handleClose, handleClick }) => {
   return (
     <header className="header-container" style={{ backgroundColor: headerColor }}>
       <p className="header-title">
-        <strong className="header-title-first">netflix</strong>roulette
+        <strong className="header-title-first">netflix</strong>
+        roulette
       </p>
       {matchMovieDetails ? (
         <Link to="/">
@@ -34,17 +35,17 @@ const Header = ({ handleClose, handleClick }) => {
           />
         </Link>
       ) : (
-        <button className="header-button" onClick={handleClick}>
+        <button type="button" className="header-button" onClick={handleClick}>
           + Add Movie
         </button>
       )}
     </header>
   );
-};
+}
 
 Header.propTypes = {
   handleClose: PropTypes.func,
-  handleClick: PropTypes.func
+  handleClick: PropTypes.func,
 };
 
 export default Header;

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useMatch, useParams } from 'react-router-dom';
@@ -7,12 +6,14 @@ import Dialog from '../Dialog/Dialog';
 import DialogMessage from '../DialogMessages/DialogMessage';
 import MovieForm from '../MovieForm/MovieForm';
 
-import { editMovie, getMovieListById, addMovie, deleteMovie } from '../../api/movie/controller';
+import {
+  editMovie, getMovieListById, addMovie, deleteMovie,
+} from '../../api/movie/controller';
 
-const AddMovieForm = () => {
+function AddMovieForm() {
   const params = useParams();
   const navigate = useNavigate();
-  const matchAddMovie = useMatch(`/new`);
+  const matchAddMovie = useMatch('/new');
   const matchEditMovie = useMatch(`/edit/${params.id}`);
   const matchDeleteMovie = useMatch(`/delete/${params.id}`);
 
@@ -22,6 +23,7 @@ const AddMovieForm = () => {
     if (matchEditMovie) return 'EDIT MOVIE';
     if (matchDeleteMovie) return 'DELETE MOVIE';
     if (matchAddMovie) return 'ADD MOVIE';
+    return '';
   };
 
   const handleDialogState = () => {
@@ -31,6 +33,7 @@ const AddMovieForm = () => {
   const selectDialogMessage = () => {
     if (matchDeleteMovie) return 'Are you sure you want to delete this movie?';
     if (matchAddMovie) return 'The movie has been added to database successfully ';
+    return '';
   };
 
   const handleFormSubmit = async (data) => {
@@ -38,7 +41,7 @@ const AddMovieForm = () => {
 
     if (matchEditMovie) {
       await editMovie(data, ourRequest)
-        .then((result) => {
+        .then(() => {
           handleDialogState();
         })
         .catch((e) => {
@@ -74,7 +77,7 @@ const AddMovieForm = () => {
     await getMovieListById(params.id, ourRequest)
       .then((result) => {
         const movieObj = result;
-        movieObj['id'] = +params.id;
+        movieObj.id = +params.id;
         setEditMovieData(movieObj);
       })
       .catch((e) => {
@@ -85,7 +88,6 @@ const AddMovieForm = () => {
   useEffect(() => {
     if (!params.id) return;
     getMovieById();
-    console.log(matchDeleteMovie, 'matchDeleteMovie');
   }, [params.id]);
 
   return (
@@ -95,9 +97,9 @@ const AddMovieForm = () => {
           {matchDeleteMovie ? (
             <DialogMessage
               isDelete={matchDeleteMovie.pathname.includes('delete')}
-              title={'CONGRATULATIONS !'}
+              title="CONGRATULATIONS !"
               message={selectDialogMessage()}
-              buttonText={'Confirm'}
+              buttonText="Confirm"
               handleConfirm={handleFormSubmit}
             />
           ) : (
@@ -113,6 +115,6 @@ const AddMovieForm = () => {
       )}
     </>
   );
-};
+}
 
 export default AddMovieForm;

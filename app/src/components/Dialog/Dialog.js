@@ -6,7 +6,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import './Dialog.scss';
 
-const Dialog = ({ title, children, handleClose }) => {
+function Dialog({ title, children, handleClose }) {
   return (
     <Portal>
       <div className="dialog-container">
@@ -24,12 +24,12 @@ const Dialog = ({ title, children, handleClose }) => {
       </div>
     </Portal>
   );
-};
+}
 
 Dialog.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.element.isRequired,
-  handleClose: PropTypes.func.isRequired
+  handleClose: PropTypes.func.isRequired,
 };
 
 export default Dialog;

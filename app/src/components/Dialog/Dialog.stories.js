@@ -10,12 +10,12 @@ export default {
   argTypes: {
     title: {
       control: 'text',
-      description: 'Title of a dialog window'
+      description: 'Title of a dialog window',
     },
     handleClick: {
-      action: 'clicked'
-    }
-  }
+      action: 'clicked',
+    },
+  },
 };
 
 const mockedMovieData = {
@@ -26,10 +26,10 @@ const mockedMovieData = {
   runtime: '2h 34min',
   overview:
     'Jules Winnfield (Samuel L. Jackson) and Vincent Vega (John Travolta) are two hit men who are out to retrieve a suitcase stolen from their employer, mob boss Marsellus Wallace (Ving Rhames). Wallace has also asked Vincent to take his wife Mia (Uma Thurman) out a few days later when Wallace himself will be out of town. Butch Coolidge (Bruce Willis) is an aging boxer who is paid by Wallace to lose his fight. The lives of these seemingly unrelated people are woven together comprising of a series of funny, bizarre and uncalled-for incidents.—Soumitra',
-  genre: 'comedy'
+  genre: 'comedy',
 };
 
-const TemplateAddMovie = () => {
+function TemplateAddMovie() {
   const [isOpen, setIsOpen] = useState(true);
 
   const handleSubmit = () => {
@@ -44,8 +44,8 @@ const TemplateAddMovie = () => {
       )}
     </>
   );
-};
-const TemplateEditMovie = () => {
+}
+function TemplateEditMovie() {
   const [isOpen, setIsOpen] = useState(true);
 
   const handleSubmit = () => {
@@ -61,8 +61,8 @@ const TemplateEditMovie = () => {
       )}
     </>
   );
-};
-const TemplateDeleteMovie = () => {
+}
+function TemplateDeleteMovie() {
   const [isOpen, setIsOpen] = useState(true);
 
   const handleSubmit = () => {
@@ -74,15 +74,15 @@ const TemplateDeleteMovie = () => {
       {isOpen && (
         <Dialog title="DELETE MOVIE" handleClose={() => setIsOpen(!isOpen)}>
           <DialogMessage
-            message={'Are you sure you want to delete this movie?'}
-            buttonText={'Confirm'}
+            message="Are you sure you want to delete this movie?"
+            buttonText="Confirm"
             handleConfirm={handleSubmit}
           />
         </Dialog>
       )}
     </>
   );
-};
+}
 
 export const AddMovie = TemplateAddMovie.bind({});
 export const EditMovie = TemplateEditMovie.bind({});

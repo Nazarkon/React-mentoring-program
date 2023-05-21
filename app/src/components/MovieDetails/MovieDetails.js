@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { getMovieListById } from '../../api/movie/controller';
 import { useParams } from 'react-router-dom';
+import { getMovieListById } from '../../api/movie/controller';
 
 import './MovieDetails.scss';
 import { createMovieItemsList } from '../../helpers/MovieItemsHelpers';
 
-const MovieDetails = () => {
+function MovieDetails() {
   const [movieInfo, setMovieInfo] = useState();
 
   const { id } = useParams();
@@ -39,7 +39,7 @@ const MovieDetails = () => {
       </div>
     </div>
   );
-};
+}
 
 // MovieDetails.propTypes = {
 //   movieInfo: PropTypes.object.isRequired

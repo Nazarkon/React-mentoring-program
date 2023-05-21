@@ -2,12 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './GenreList.scss';
 
-const GenreList = (props) => {
+function GenreList(props) {
   const { genreList, currentItem, updateList } = props;
 
-  const capitalizeLetter = (word) => {
-    return word.charAt(0).toUpperCase() + word.slice(1);
-  };
+  const capitalizeLetter = (word) => word.charAt(0).toUpperCase() + word.slice(1);
 
   return (
     <ul className="list-container">
@@ -22,12 +20,12 @@ const GenreList = (props) => {
       ))}
     </ul>
   );
-};
+}
 
 GenreList.propTypes = {
   genreList: PropTypes.array.isRequired,
   currentItem: PropTypes.object.isRequired,
-  updateList: PropTypes.func
+  updateList: PropTypes.func,
 };
 
 export default GenreList;

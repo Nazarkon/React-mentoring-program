@@ -1,7 +1,7 @@
 import React from 'react';
 
-import MovieCard from './MovieCard';
 import { BrowserRouter } from 'react-router-dom';
+import MovieCard from './MovieCard';
 
 import filmImage from '../../assets/images/Bitmap.png';
 
@@ -12,33 +12,35 @@ export default {
     imageUrl: {
       control: 'text',
       description: 'Image url that should be a string',
-      defaultValue: filmImage
+      defaultValue: filmImage,
     },
     name: {
       control: 'text',
       description: 'Film title',
-      defaultValue: 'Pulp Fiction'
+      defaultValue: 'Pulp Fiction',
     },
     year: {
       control: 'text',
       description: 'Should be a year when film was presented',
-      defaultValue: '2003'
+      defaultValue: '2003',
     },
     genreList: {
       control: 'array',
       describe: 'List of genres that connected to this film',
-      defaultValue: ['Action', 'Adventure']
+      defaultValue: ['Action', 'Adventure'],
     },
     handleClick: {
-      action: 'clicked'
-    }
-  }
+      action: 'clicked',
+    },
+  },
 };
 
-const Template = (args) => (
-  <BrowserRouter>
-    <MovieCard {...args} />
-  </BrowserRouter>
-);
+function Template(args) {
+  return (
+    <BrowserRouter>
+      <MovieCard {...args} />
+    </BrowserRouter>
+  );
+}
 
 export const Default = Template.bind({});

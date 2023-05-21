@@ -16,7 +16,7 @@ export default (payload) => {
     budget: 30000000,
     revenue: 445435700,
     runtime: payload.runtime,
-    genres: capitalizeLetter(payload.genre)
+    genres: capitalizeLetter(payload.genre),
   };
   return data;
 };

@@ -8,16 +8,18 @@ export default {
     defaultValue: {
       control: {
         type: 'text',
-        defaultValue: ''
-      }
+        defaultValue: '',
+      },
     },
     onSearch: {
-      action: 'searched'
-    }
-  }
+      action: 'searched',
+    },
+  },
 };
 
-const Template = (args) => <SearchInput {...args} />;
+function Template(args) {
+  return <SearchInput {...args} />;
+}
 
 export const Default = Template.bind({});
 Default.args = {};
