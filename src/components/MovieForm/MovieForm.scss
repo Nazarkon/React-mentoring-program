@@ -1,0 +1,116 @@
+.movie-form-container {
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  .movie-form-container-input {
+    display: flex;
+    justify-content: space-between;
+  }
+  .movie-form-label-main {
+    margin-right: 30px;
+  }
+  .movie-form-label-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    .movie-form-label-input {
+      width: 100%;
+      min-width: 500px;
+      height: 50px;
+      font-size: 20px;
+      background: rgba(50, 50, 50, 0.8);
+      color: white;
+      border: 0;
+    }
+    .movie-form-label-input-second {
+      width: 100%;
+      max-width: 140px;
+      height: 50px;
+      font-size: 20px;
+      background: rgba(50, 50, 50, 0.8);
+      color: white;
+      border: 0;
+    }
+    .movie-form-label-textarea {
+      width: 100%;
+      min-width: 500px;
+      height: 150px;
+      font-size: 20px;
+      background: rgba(50, 50, 50, 0.8);
+      color: white;
+      mix-blend-mode: normal;
+      border: 0;
+    }
+    .movie-form-label-title {
+      color: #f65261;
+      text-transform: uppercase;
+      font-size: 16px;
+      margin-bottom: 13px;
+    }
+
+    input::placeholder {
+      font-size: 20px;
+      opacity: 0.5;
+      color: white;
+    }
+  }
+  .movie-form-label-container-second {
+    display: flex;
+    width: 100%;
+    max-width: 140px;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+  .movie-form-label-title {
+    color: #f65261;
+    text-transform: uppercase;
+    font-size: 16px;
+    margin-bottom: 13px;
+  }
+  .movie-form-container-buttons {
+    text-align: right;
+    .movie-form-container-button-cancel {
+      margin-right: 13px;
+      color: #ffffff;
+      text-transform: uppercase;
+      padding: 17px 57px;
+      border: 1px solid transparent;
+      background-color: #f65261;
+      &:hover {
+        background-color: transparent;
+        color: #f65261;
+        border: 1px solid #f65261;
+      }
+    }
+    .movie-form-container-button-submit {
+      color: #ffffff;
+      text-transform: uppercase;
+      padding: 17px 57px;
+      background-color: #f65261;
+      border: 1px solid transparent;
+      &:hover {
+        background-color: transparent;
+        color: #f65261;
+        border: 1px solid #f65261;
+      }
+    }
+  }
+  input[type="date"] {
+    background-color: rgba(50, 50, 50, 0.8);
+    padding: 15px;
+    font-family: "Roboto Mono", monospace;
+    color: #ffffff;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+}
+.movie-form-error-message {
+  position: relative;
+  font-size: 20px;
+  color: red;
+  word-break: break-all;
+  margin: 1px;
+}
