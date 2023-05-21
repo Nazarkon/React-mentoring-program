@@ -1,0 +1,37 @@
+.dialog-message-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  .dialog-message-text {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 400;
+  }
+  .dialog-message-button {
+    width: 100%;
+    max-width: 200px;
+    border: 0;
+    padding: 15px 50px;
+    background: #f65261;
+    margin-top: 69px;
+    color: #ffff;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+.dialog-message-add-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  flex-direction: column;
+}
+.dialog-message-add-container-title {
+  font-size: 20px;
+  margin: 10px 10px;
+}
