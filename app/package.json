@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
+  "husky": {
+    "hooks": {
+      "pre-commit": "jest --watch a && git add -A ."
+    }
+  },
   "scripts": {
     "start": "webpack serve --mode development --env=development",
     "build": "webpack --mode=production",
